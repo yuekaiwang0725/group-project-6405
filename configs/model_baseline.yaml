@@ -1,0 +1,6 @@
+model:
+  name: tfidf_svm
+  tfidf_max_features: 30000
+  ngram_range: [1, 2]
+  c: 1.0
+  kernel: linear
