@@ -67,11 +67,21 @@ python -m src.main prepare-data
 ### 3) Run experiments
 
 ```bash
-python -m experiments.run_baseline
-python -m experiments.run_distilbert
+python -m experiments.run_baseline --dataset imdb
+python -m experiments.run_baseline --dataset sst2
+python -m experiments.run_distilbert --dataset imdb --epochs 3 --batch-size 16 --max-length 128
+python -m experiments.run_distilbert --dataset sst2 --epochs 3 --batch-size 16 --max-length 128
 python -m experiments.run_cross_domain
 python -m experiments.run_robustness
 ```
+
+Generated outputs:
+
+- Processed datasets: `data/processed/*.csv`
+- Statistics and labels: `data/artifacts/*.json`
+- Model checkpoints: `checkpoints/baseline/*` and `checkpoints/distilbert/*`
+- Metrics tables: `results/tables/*.csv` and `results/tables/*.json`
+- Figures: `results/figures/*.png`
 
 ### 4) Launch GUI demo
 
@@ -99,4 +109,12 @@ streamlit run demo/gui_demo.py
 - [ ] Presentation slides
 - [ ] <=10 min video script
 - [ ] Group reflection + GAI declaration
+
+## Submission Checklist (One-person workflow)
+
+1. Run data + experiments once from scratch (new terminal session).
+2. Confirm key files exist in `results/figures` and `results/tables`.
+3. Open GUI and verify prediction/explain/robustness/benchmark tabs.
+4. Finalize report, slides, and video script from templates.
+5. Push all code and docs to GitHub with a clean `git status`.
 

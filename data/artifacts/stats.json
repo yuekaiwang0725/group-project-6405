@@ -1,0 +1,42 @@
+{
+  "imdb": {
+    "train": {
+      "rows": 22500,
+      "positive_ratio": 0.5021333333333333,
+      "avg_length_chars": 1300.2961777777778,
+      "avg_length_words": 231.202
+    },
+    "val": {
+      "rows": 2500,
+      "positive_ratio": 0.4808,
+      "avg_length_chars": 1320.7728,
+      "avg_length_words": 234.0084
+    },
+    "test": {
+      "rows": 25000,
+      "positive_ratio": 0.5,
+      "avg_length_chars": 1271.46384,
+      "avg_length_words": 226.24924
+    }
+  },
+  "sst2": {
+    "train": {
+      "rows": 67349,
+      "positive_ratio": 0.5578256544269403,
+      "avg_length_chars": 52.5055902834489,
+      "avg_length_words": 9.409553222765
+    },
+    "val": {
+      "rows": 872,
+      "positive_ratio": 0.5091743119266054,
+      "avg_length_chars": 104.84174311926606,
+      "avg_length_words": 19.548165137614678
+    },
+    "test": {
+      "rows": 872,
+      "positive_ratio": 0.5091743119266054,
+      "avg_length_chars": 104.84174311926606,
+      "avg_length_words": 19.548165137614678
+    }
+  }
+}
