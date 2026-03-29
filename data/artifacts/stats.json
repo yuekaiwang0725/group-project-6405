@@ -38,5 +38,25 @@
       "avg_length_chars": 104.84174311926606,
       "avg_length_words": 19.548165137614678
     }
+  },
+  "emotion": {
+    "train": {
+      "rows": 16000,
+      "positive_ratio": 1.5659375,
+      "avg_length_chars": 96.8458125,
+      "avg_length_words": 19.1663125
+    },
+    "val": {
+      "rows": 2000,
+      "positive_ratio": 1.569,
+      "avg_length_chars": 95.3475,
+      "avg_length_words": 18.866
+    },
+    "test": {
+      "rows": 2000,
+      "positive_ratio": 1.532,
+      "avg_length_chars": 96.5865,
+      "avg_length_words": 19.154
+    }
   }
 }

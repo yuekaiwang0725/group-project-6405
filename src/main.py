@@ -2,6 +2,7 @@ import argparse
 from dataclasses import asdict
 from pathlib import Path
 
+from src.data.load_emotion import load_emotion_splits
 from src.data.load_imdb import load_imdb_splits
 from src.data.load_sst2 import load_sst2_splits
 from src.data.split import compute_split_stats
@@ -12,6 +13,18 @@ from src.visualization.eda_plots import (
 )
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+DATASET_LABEL_MAPPINGS: dict[str, dict[str, str]] = {
+    "imdb": {"0": "negative", "1": "positive"},
+    "sst2": {"0": "negative", "1": "positive"},
+    "emotion": {
+        "0": "sadness",
+        "1": "joy",
+        "2": "love",
+        "3": "anger",
+        "4": "fear",
+        "5": "surprise",
+    },
+}
 
 
 def prepare_data() -> None:
@@ -25,6 +38,7 @@ def prepare_data() -> None:
     datasets = {
         "imdb": load_imdb_splits(),
         "sst2": load_sst2_splits(),
+        "emotion": load_emotion_splits(),
     }
 
     stats_payload: dict[str, dict[str, dict[str, float | int]]] = {}
@@ -47,7 +61,7 @@ def prepare_data() -> None:
                 )
 
     write_json(stats_payload, artifacts_dir / "stats.json")
-    write_json({"0": "negative", "1": "positive"}, artifacts_dir / "label_mapping.json")
+    write_json(DATASET_LABEL_MAPPINGS, artifacts_dir / "label_mapping.json")
     print("Data preparation completed. Files written to data/processed and data/artifacts.")
 
 

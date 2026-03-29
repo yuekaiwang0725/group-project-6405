@@ -1,4 +1,18 @@
 {
-  "0": "negative",
-  "1": "positive"
+  "imdb": {
+    "0": "negative",
+    "1": "positive"
+  },
+  "sst2": {
+    "0": "negative",
+    "1": "positive"
+  },
+  "emotion": {
+    "0": "sadness",
+    "1": "joy",
+    "2": "love",
+    "3": "anger",
+    "4": "fear",
+    "5": "surprise"
+  }
 }

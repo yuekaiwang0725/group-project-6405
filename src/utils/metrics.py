@@ -5,9 +5,16 @@ from typing import Any
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 
 
-def classification_metrics(y_true: list[int], y_pred: list[int]) -> dict[str, float]:
+def infer_average_mode(labels: list[int]) -> str:
+    return "binary" if len(set(labels)) <= 2 else "macro"
+
+
+def classification_metrics(
+    y_true: list[int], y_pred: list[int], average: str | None = None
+) -> dict[str, float]:
+    effective_average = average or infer_average_mode(y_true + y_pred)
     precision, recall, f1, _ = precision_recall_fscore_support(
-        y_true, y_pred, average="binary", zero_division=0
+        y_true, y_pred, average=effective_average, zero_division=0
     )
     return {
         "accuracy": float(accuracy_score(y_true, y_pred)),

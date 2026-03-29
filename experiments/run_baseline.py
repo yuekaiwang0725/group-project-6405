@@ -13,6 +13,11 @@ from src.utils.io import ensure_dir, write_json
 from src.visualization.confusion_matrix import save_confusion_matrix
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+DATASET_LABELS: dict[str, list[str]] = {
+    "imdb": ["negative", "positive"],
+    "sst2": ["negative", "positive"],
+    "emotion": ["sadness", "joy", "love", "anger", "fear", "surprise"],
+}
 
 
 def _load_split(dataset_name: str, split: str) -> pd.DataFrame:
@@ -49,11 +54,18 @@ def run_baseline(dataset_name: str = "imdb") -> None:
     pd.DataFrame([metrics]).to_csv(
         results_tables / f"baseline_{dataset_name}_metrics.csv", index=False
     )
+    labels = sorted(set(y_test) | set(y_pred))
+    label_names = DATASET_LABELS.get(dataset_name, [])
+    class_names = [
+        label_names[label] if 0 <= label < len(label_names) else str(label) for label in labels
+    ]
     save_confusion_matrix(
         y_true=y_test,
         y_pred=y_pred,
         output_path=results_figures / f"baseline_{dataset_name}_confusion_matrix.png",
         title=f"Baseline SVM Confusion Matrix ({dataset_name.upper()})",
+        labels=labels,
+        class_names=class_names,
     )
 
     print(f"Baseline completed for {dataset_name}. Metrics: {metrics}")
@@ -61,7 +73,7 @@ def run_baseline(dataset_name: str = "imdb") -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run TF-IDF + SVM baseline experiment")
-    parser.add_argument("--dataset", default="imdb", choices=["imdb", "sst2"])
+    parser.add_argument("--dataset", default="imdb", choices=["imdb", "sst2", "emotion"])
     args = parser.parse_args()
     run_baseline(args.dataset)
 

@@ -30,7 +30,14 @@ def predict_with_distilbert(texts: list[str], checkpoint_dir: str | Path) -> lis
     predictions: list[int] = []
     for result in outputs:
         label = str(result["label"]).lower()
-        predictions.append(1 if label.endswith("1") else 0)
+        if label.startswith("label_"):
+            predictions.append(int(label.split("_", maxsplit=1)[1]))
+        elif label in {"positive", "pos"}:
+            predictions.append(1)
+        elif label in {"negative", "neg"}:
+            predictions.append(0)
+        else:
+            raise ValueError(f"Unsupported label format from pipeline: {result['label']}")
     return predictions
 
 

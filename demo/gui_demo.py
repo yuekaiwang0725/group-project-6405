@@ -19,6 +19,22 @@ MODEL_LABELS = {
     "distilbert": "DistilBERT",
     "bert_base_uncased": "BERT-base-uncased",
 }
+EMOTION_LABELS = {
+    0: "sadness",
+    1: "joy",
+    2: "love",
+    3: "anger",
+    4: "fear",
+    5: "surprise",
+}
+EMOTION_ICONS = {
+    "sadness": "😢",
+    "joy": "😄",
+    "love": "❤️",
+    "anger": "😠",
+    "fear": "😨",
+    "surprise": "😲",
+}
 SAMPLE_TEXTS = {
     "Custom": "",
     "Clearly positive": "This movie is surprisingly good, emotional, and well acted.",
@@ -26,10 +42,23 @@ SAMPLE_TEXTS = {
     "Mixed review": "The visuals are excellent, but the story feels slow and predictable.",
     "Sarcastic": "What an amazing movie, I almost fell asleep from all the excitement.",
 }
+EMOTION_SAMPLE_TEXTS = {
+    "Custom": "",
+    "Joyful": "I am so excited and happy today, everything is going absolutely great!",
+    "Sad": "I feel completely lost and alone, nothing seems to go right for me.",
+    "Angry": "I can't believe how unfair and frustrating this whole situation is.",
+    "Fearful": "I'm terrified about what might happen next, I can't stop worrying.",
+    "Loving": "I cherish every moment with you, you mean the whole world to me.",
+    "Surprised": "I had absolutely no idea this was going to happen, I'm completely shocked!",
+}
 
 
 def _label_text(label: int) -> str:
     return "positive" if label == 1 else "negative"
+
+
+def _emotion_label_text(label: int) -> str:
+    return EMOTION_LABELS.get(label, str(label))
 
 
 def _resolve_checkpoint_dir(*parts: str) -> Path | None:
@@ -56,8 +85,29 @@ def _load_baseline():
 
 
 @st.cache_resource
+def _load_emotion_baseline():
+    vectorizer_path = (
+        PROJECT_ROOT / "checkpoints" / "baseline" / "emotion" / "tfidf_vectorizer.joblib"
+    )
+    model_path = PROJECT_ROOT / "checkpoints" / "baseline" / "emotion" / "svm_model.joblib"
+    if not vectorizer_path.exists() or not model_path.exists():
+        return None, None
+    vectorizer = joblib.load(vectorizer_path)
+    model: BaselineSVM = joblib.load(model_path)
+    return vectorizer, model
+
+
+@st.cache_resource
 def _load_distilbert():
     model_dir = _resolve_checkpoint_dir("distilbert", "imdb")
+    if model_dir is None:
+        return None
+    return load_finetuned_distilbert(model_dir)
+
+
+@st.cache_resource
+def _load_emotion_distilbert():
+    model_dir = _resolve_checkpoint_dir("distilbert", "emotion")
     if model_dir is None:
         return None
     return load_finetuned_distilbert(model_dir)
@@ -81,8 +131,29 @@ def _predict_baseline(text: str) -> tuple[int, float] | None:
     return pred, confidence
 
 
+def _predict_emotion_baseline(text: str) -> tuple[int, float] | None:
+    vectorizer, model = _load_emotion_baseline()
+    if vectorizer is None or model is None:
+        return None
+    features = vectorizer.transform([text])
+    pred = int(model.predict(features)[0])
+    conf_scores = model.predict_confidence(features)[0]
+    if hasattr(conf_scores, "__len__"):
+        confidence = float(conf_scores[pred])
+    else:
+        confidence = float(conf_scores)
+    return pred, confidence
+
+
 def _predict_distilbert(text: str) -> tuple[int, float] | None:
     artifacts = _load_distilbert()
+    if artifacts is None:
+        return None
+    return predict_sentiment(artifacts, text)
+
+
+def _predict_emotion_distilbert(text: str) -> tuple[int, float] | None:
+    artifacts = _load_emotion_distilbert()
     if artifacts is None:
         return None
     return predict_sentiment(artifacts, text)
@@ -114,6 +185,18 @@ def _render_prediction_result(model_name: str, result: tuple[int, float] | None)
         return
     label, confidence = result
     st.metric("Sentiment", _label_text(label).title())
+    st.caption(f"Confidence: {confidence:.4f}")
+
+
+def _render_emotion_result(model_display: str, result: tuple[int, float] | None) -> None:
+    st.subheader(model_display)
+    if result is None:
+        st.warning("Checkpoint missing.")
+        return
+    label, confidence = result
+    emotion_name = _emotion_label_text(label)
+    icon = EMOTION_ICONS.get(emotion_name, "")
+    st.metric("Emotion", f"{icon} {emotion_name.title()}")
     st.caption(f"Confidence: {confidence:.4f}")
 
 
@@ -149,14 +232,14 @@ def _show_image(path: Path, caption: str) -> None:
 def main() -> None:
     st.set_page_config(page_title="EE6405 Sentiment GUI", layout="wide")
     st.title("Trustworthy English Sentiment Analysis")
-    st.write("GUI demo for baseline, DistilBERT, and BERT sentiment inference and analysis.")
+    st.write("GUI demo for sentiment and emotion classification using SVM, DistilBERT, and BERT.")
 
-    tab_predict, tab_explain, tab_robustness, tab_benchmark = st.tabs(
-        ["Predict", "Explain", "Robustness", "Benchmark"]
+    tab_predict, tab_emotion, tab_explain, tab_robustness, tab_benchmark = st.tabs(
+        ["Sentiment", "Emotion (6-class)", "Explain", "Robustness", "Benchmark"]
     )
 
     with tab_predict:
-        st.subheader("Prediction Playground")
+        st.subheader("Sentiment Prediction (Positive / Negative)")
         if "predict_text" not in st.session_state:
             st.session_state["predict_text"] = SAMPLE_TEXTS["Clearly positive"]
         example_name = st.selectbox("Quick example", list(SAMPLE_TEXTS), index=1)
@@ -170,6 +253,24 @@ def main() -> None:
             for column, model_name in zip(columns, MODEL_LABELS):
                 with column:
                     _render_prediction_result(model_name, results[model_name])
+
+    with tab_emotion:
+        st.subheader("Emotion Classification (6 classes)")
+        st.caption("Classes: 😢 sadness · 😄 joy · ❤️ love · 😠 anger · 😨 fear · 😲 surprise")
+        if "emotion_text" not in st.session_state:
+            st.session_state["emotion_text"] = EMOTION_SAMPLE_TEXTS["Joyful"]
+        emotion_example = st.selectbox(
+            "Quick example", list(EMOTION_SAMPLE_TEXTS), index=1, key="emotion_example"
+        )
+        if emotion_example != "Custom":
+            st.session_state["emotion_text"] = EMOTION_SAMPLE_TEXTS[emotion_example]
+        emotion_text = st.text_area("Input text", key="emotion_text")
+        if st.button("Detect emotion"):
+            col_svm, col_distilbert = st.columns(2)
+            with col_svm:
+                _render_emotion_result("TF-IDF + SVM", _predict_emotion_baseline(emotion_text))
+            with col_distilbert:
+                _render_emotion_result("DistilBERT", _predict_emotion_distilbert(emotion_text))
 
     with tab_explain:
         st.subheader("Explainability")
@@ -220,7 +321,7 @@ def main() -> None:
                 )
 
     with tab_benchmark:
-        st.subheader("Model Comparison")
+        st.subheader("Sentiment Analysis — Model Comparison")
         _show_metric_table(
             PROJECT_ROOT / "results" / "tables" / "baseline_imdb_metrics.csv",
             "Baseline IMDb Metrics",
@@ -242,23 +343,40 @@ def main() -> None:
             "Robustness Scores",
         )
 
+        st.subheader("Emotion Classification — Model Comparison")
+        _show_metric_table(
+            PROJECT_ROOT / "results" / "tables" / "baseline_emotion_metrics.csv",
+            "Baseline SVM — Emotion (macro)",
+        )
+        _show_metric_table(
+            PROJECT_ROOT / "results" / "tables" / "distilbert_emotion_test_metrics.csv",
+            "DistilBERT — Emotion (macro)",
+        )
+
         st.subheader("Figures")
-        _show_image(
-            PROJECT_ROOT / "results" / "figures" / "baseline_imdb_confusion_matrix.png",
-            "Baseline confusion matrix",
-        )
-        _show_image(
-            PROJECT_ROOT / "results" / "figures" / "distilbert_imdb_training_curves.png",
-            "DistilBERT training curves",
-        )
-        _show_image(
-            PROJECT_ROOT / "results" / "figures" / "bert_base_uncased_imdb_training_curves.png",
-            "BERT training curves",
-        )
-        _show_image(
-            PROJECT_ROOT / "results" / "figures" / "imdb_model_comparison.png",
-            "IMDb model comparison",
-        )
+        col1, col2 = st.columns(2)
+        with col1:
+            _show_image(
+                PROJECT_ROOT / "results" / "figures" / "baseline_imdb_confusion_matrix.png",
+                "Baseline confusion matrix (IMDb)",
+            )
+            _show_image(
+                PROJECT_ROOT / "results" / "figures" / "distilbert_imdb_training_curves.png",
+                "DistilBERT training curves (IMDb)",
+            )
+            _show_image(
+                PROJECT_ROOT / "results" / "figures" / "bert_base_uncased_imdb_training_curves.png",
+                "BERT training curves (IMDb)",
+            )
+        with col2:
+            _show_image(
+                PROJECT_ROOT / "results" / "figures" / "baseline_emotion_confusion_matrix.png",
+                "Baseline confusion matrix (Emotion)",
+            )
+            _show_image(
+                PROJECT_ROOT / "results" / "figures" / "distilbert_emotion_training_curves.png",
+                "DistilBERT training curves (Emotion)",
+            )
         _show_image(
             PROJECT_ROOT / "results" / "figures" / "model_comparison_in_domain_f1.png",
             "In-domain model comparison",

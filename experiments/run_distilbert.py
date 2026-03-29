@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-import evaluate
 import pandas as pd
 from datasets import Dataset
 from transformers import (
@@ -16,7 +15,7 @@ from transformers import (
 
 from src.utils.device import configure_device_runtime, resolve_device
 from src.utils.io import ensure_dir, write_json
-from src.utils.metrics import classification_metrics
+from src.utils.metrics import classification_metrics, infer_average_mode
 from src.utils.seed import set_seed
 from src.visualization.train_curves import save_training_curves
 
@@ -71,10 +70,11 @@ def run_distilbert(
     train_dataset = _to_hf_dataset(train_df)
     val_dataset = _to_hf_dataset(val_df)
     test_dataset = _to_hf_dataset(test_df)
+    num_labels = int(train_df["label"].nunique())
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=2)
-    metric = evaluate.load("f1")
+    model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=num_labels)
+    average_mode = infer_average_mode(train_df["label"].astype(int).tolist())
 
     def tokenize(batch):
         return tokenizer(batch["text"], truncation=True, max_length=max_length)
@@ -88,11 +88,11 @@ def run_distilbert(
     def compute_metrics(eval_pred):
         logits, labels = eval_pred
         preds = logits.argmax(axis=-1)
-        metrics = classification_metrics(y_true=labels.tolist(), y_pred=preds.tolist())
-        metrics["f1"] = metric.compute(
-            predictions=preds, references=labels, average="binary"
-        )["f1"]
-        return metrics
+        return classification_metrics(
+            y_true=labels.tolist(),
+            y_pred=preds.tolist(),
+            average=average_mode,
+        )
 
     out_dir = ensure_dir(PROJECT_ROOT / "checkpoints" / run_name / dataset_name)
     results_tables = ensure_dir(PROJECT_ROOT / "results" / "tables")
@@ -159,7 +159,7 @@ def run_distilbert(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Fine-tune a transformer for sentiment analysis")
-    parser.add_argument("--dataset", default="imdb", choices=["imdb", "sst2"])
+    parser.add_argument("--dataset", default="imdb", choices=["imdb", "sst2", "emotion"])
     parser.add_argument("--epochs", type=int, default=3)
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--max-length", type=int, default=128)
