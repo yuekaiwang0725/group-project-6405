@@ -13,3 +13,5 @@ plotly
 lime
 joblib
 tqdm
+wordcloud
+youtube-comment-downloader

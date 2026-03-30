@@ -9,6 +9,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+from demo.custom_styles import inject_custom_css
+from demo.dashboard_tab import render_dashboard_tab
 from src.explainability.token_highlight import top_token_contributions
 from src.models.baseline_svm import BaselineSVM
 from src.models.distilbert import load_finetuned_distilbert, predict_sentiment
@@ -231,11 +233,12 @@ def _show_image(path: Path, caption: str) -> None:
 
 def main() -> None:
     st.set_page_config(page_title="EE6405 Sentiment GUI", layout="wide")
+    inject_custom_css()
     st.title("Trustworthy English Sentiment Analysis")
     st.write("GUI demo for sentiment and emotion classification using SVM, DistilBERT, and BERT.")
 
-    tab_predict, tab_emotion, tab_explain, tab_robustness, tab_benchmark = st.tabs(
-        ["Sentiment", "Emotion (6-class)", "Explain", "Robustness", "Benchmark"]
+    tab_predict, tab_emotion, tab_explain, tab_robustness, tab_benchmark, tab_dashboard = st.tabs(
+        ["Sentiment", "Emotion (6-class)", "Explain", "Robustness", "Benchmark", "📊 Sentiment Radar"]
     )
 
     with tab_predict:
@@ -385,6 +388,9 @@ def main() -> None:
             PROJECT_ROOT / "results" / "figures" / "robustness_drop_curve.png",
             "Robustness F1 drop",
         )
+
+    with tab_dashboard:
+        render_dashboard_tab()
 
 
 if __name__ == "__main__":
