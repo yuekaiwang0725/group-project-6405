@@ -1,6 +1,6 @@
 # EE6405 Sentiment Project
 
-One-person, one-week project template for EE6405 NLP group assignment.
+Group project for EE6405 NLP assignment.
 
 ## Project Goal
 
@@ -89,17 +89,7 @@ Generated outputs:
 streamlit run demo/gui_demo.py
 ```
 
-## One-Week Execution Plan
-
-- Day 1: data ingestion, cleaning, EDA plots
-- Day 2: baseline TF-IDF + SVM
-- Day 3: DistilBERT fine-tuning
-- Day 4: cross-domain + robustness experiments
-- Day 5: explainability + Streamlit integration
-- Day 6: report and slides drafting
-- Day 7: video recording and final packaging
-
-## Minimal Deliverables Checklist
+## Deliverables Checklist
 
 - [ ] Reproducible code (`src/` + `experiments/`)
 - [ ] Metrics table (Accuracy / Precision / Recall / F1)
@@ -107,14 +97,14 @@ streamlit run demo/gui_demo.py
 - [ ] GUI demo
 - [ ] Report PDF
 - [ ] Presentation slides
-- [ ] <=10 min video script
+- [ ] <=10 min video
 - [ ] Group reflection + GAI declaration
 
-## Submission Checklist (One-person workflow)
+## Submission Checklist
 
 1. Run data + experiments once from scratch (new terminal session).
 2. Confirm key files exist in `results/figures` and `results/tables`.
 3. Open GUI and verify prediction/explain/robustness/benchmark tabs.
-4. Finalize report, slides, and video script from templates.
+4. Finalize report, slides, and video from templates.
 5. Push all code and docs to GitHub with a clean `git status`.
 
