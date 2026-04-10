@@ -52,6 +52,14 @@ ee6405-group/
 
 > **Prerequisites:** Python 3.10+ is required.
 
+**One-command setup** (creates venv, installs deps, runs experiments, launches demo):
+
+```bash
+bash setup.sh
+```
+
+Or follow the steps below manually:
+
 ### 1) Create environment
 
 ```bash
