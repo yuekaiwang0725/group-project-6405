@@ -11,6 +11,24 @@ import re
 from typing import Any
 
 
+def _parse_votes(value: object) -> int:
+    """Convert vote counts like ``'220k'`` or ``'1.5m'`` to int."""
+    if isinstance(value, int):
+        return value
+    s = str(value).strip().replace(",", "")
+    if not s:
+        return 0
+    multiplier = 1
+    if s[-1].lower() == "k":
+        multiplier, s = 1_000, s[:-1]
+    elif s[-1].lower() == "m":
+        multiplier, s = 1_000_000, s[:-1]
+    try:
+        return int(float(s) * multiplier)
+    except (ValueError, OverflowError):
+        return 0
+
+
 def extract_video_id(url: str) -> str | None:
     """Return the 11-character video ID from various YouTube URL formats."""
     patterns = [
@@ -68,7 +86,7 @@ def fetch_youtube_comments(
                     "text": str(raw.get("text", "")),
                     "author": str(raw.get("author", "Anonymous")),
                     "time": str(raw.get("time", "")),
-                    "likes": int(raw.get("votes", 0) or 0),
+                    "likes": _parse_votes(raw.get("votes", 0)),
                 }
             )
             if len(comments) >= max_comments:

@@ -50,29 +50,41 @@ ee6405-group/
 
 ## Quick Start
 
+> **Prerequisites:** Python 3.10+ is required.
+
 ### 1) Create environment
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate
+```
+
+Activate the virtual environment:
+
+- **macOS / Linux:** `source .venv/bin/activate`
+- **Windows (cmd):** `.venv\Scripts\activate.bat`
+- **Windows (PowerShell):** `.venv\Scripts\Activate.ps1`
+
+Then install dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
 ### 2) Prepare data
 
 ```bash
-python -m src.main prepare-data
+python3 -m src.main prepare-data
 ```
 
 ### 3) Run experiments
 
 ```bash
-python -m experiments.run_baseline --dataset imdb
-python -m experiments.run_baseline --dataset sst2
-python -m experiments.run_distilbert --dataset imdb --epochs 3 --batch-size 16 --max-length 128
-python -m experiments.run_distilbert --dataset sst2 --epochs 3 --batch-size 16 --max-length 128
-python -m experiments.run_cross_domain
-python -m experiments.run_robustness
+python3 -m experiments.run_baseline --dataset imdb
+python3 -m experiments.run_baseline --dataset sst2
+python3 -m experiments.run_distilbert --dataset imdb --epochs 3 --batch-size 16 --max-length 128
+python3 -m experiments.run_distilbert --dataset sst2 --epochs 3 --batch-size 16 --max-length 128
+python3 -m experiments.run_cross_domain
+python3 -m experiments.run_robustness
 ```
 
 Generated outputs:
@@ -88,6 +100,8 @@ Generated outputs:
 ```bash
 streamlit run demo/gui_demo.py
 ```
+
+The dashboard will open at `http://localhost:8501`.
 
 ## Deliverables Checklist
 
