@@ -122,3 +122,4 @@ The dashboard will open at `http://localhost:8501`.
 4. Finalize report, slides, and video from templates.
 5. Push all code and docs to GitHub with a clean `git status`.
 
+# group-project-6405
