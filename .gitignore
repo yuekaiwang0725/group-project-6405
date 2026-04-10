@@ -14,3 +14,4 @@ results/tables/
 
 *.log
 .waylog/
+pip-*/
