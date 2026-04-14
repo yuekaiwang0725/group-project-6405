@@ -1,36 +1,175 @@
-# BERTweet Text Classification — Group Project
+# EE6405 Sentiment Project
+
+Group project for EE6405 NLP assignment.
+
+## Project Goal
+
+Build a trustworthy English sentiment classification system with:
+
+- A traditional baseline: TF-IDF + SVM
+- A modern model: DistilBERT
+- Cross-domain evaluation: IMDb <-> SST-2
+- Robustness checks: simple text perturbations
+- Explainability: token/word-level attribution
+- Lightweight GUI demo for visualization
+
+## Suggested Directory Structure
+
+```text
+ee6405-group/
+├── README.md
+├── requirements.txt
+├── .gitignore
+├── configs/
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── artifacts/
+├── src/
+│   ├── data/
+│   ├── features/
+│   ├── models/
+│   ├── training/
+│   ├── robustness/
+│   ├── explainability/
+│   ├── visualization/
+│   └── utils/
+├── experiments/
+├── notebooks/
+├── results/
+│   ├── figures/
+│   ├── tables/
+│   └── logs/
+├── checkpoints/
+├── demo/
+├── docs/
+├── report/
+├── slides/
+└── video/
+```
+
+## Quick Start
+
+> **Prerequisites:** Python 3.10+ is required.
+
+**One-command setup** (creates venv, installs deps, runs experiments, launches demo):
+
+```bash
+bash setup.sh
+```
+
+Or follow the steps below manually:
+
+### 1) Create environment
+
+```bash
+python3 -m venv .venv
+```
+
+Activate the virtual environment:
+
+- **macOS / Linux:** `source .venv/bin/activate`
+- **Windows (cmd):** `.venv\Scripts\activate.bat`
+- **Windows (PowerShell):** `.venv\Scripts\Activate.ps1`
+
+Then install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2) Prepare data
+
+```bash
+python3 -m src.main prepare-data
+```
+
+### 3) Run experiments
+
+```bash
+python3 -m experiments.run_baseline --dataset imdb
+python3 -m experiments.run_baseline --dataset sst2
+python3 -m experiments.run_distilbert --dataset imdb --epochs 3 --batch-size 16 --max-length 128
+python3 -m experiments.run_distilbert --dataset sst2 --epochs 3 --batch-size 16 --max-length 128
+python3 -m experiments.run_cross_domain
+python3 -m experiments.run_robustness
+```
+Logistic Regression + SHAP
+```bash
+python3 -m experiments.run_Logistic_Regression --dataset imdb --max-features 10000
+python3 -m experiments.run_Logistic_Regression --dataset sst2 --max-features 10000
+```
+Generated outputs:
+
+- Processed datasets: `data/processed/*.csv`
+- Statistics and labels: `data/artifacts/*.json`
+- Model checkpoints: `checkpoints/baseline/*` and `checkpoints/distilbert/*`
+- Metrics tables: `results/tables/*.csv` and `results/tables/*.json`
+- Figures: `results/figures/*.png`
+
+Logistic Regression + SHAP
+- Processed datasets (Same)
+- Statistics and labels (Same)
+- Model checkpoints: `checkpoints/logistic_regression/*`
+- Metrics tables (Same)
+- Figures (Same)
+
+### 4) Launch GUI demo
+
+```bash
+streamlit run demo/gui_demo.py
+```
+
+The dashboard will open at `http://localhost:8501`.
+
+Logistic Regression + SHAP
+```bash
+python3 -m streamlit run demo/gui_3.py
+```
+
+## Deliverables Checklist
+
+- [ ] Reproducible code (`src/` + `experiments/`)
+- [ ] Metrics table (Accuracy / Precision / Recall / F1)
+- [ ] Core figures (distribution, confusion matrix, training curves, comparison)
+- [ ] GUI demo
+- [ ] Report PDF
+- [ ] Presentation slides
+- [ ] <=10 min video
+- [ ] Group reflection + GAI declaration
+
+## Submission Checklist
+
+1. Run data + experiments once from scratch (new terminal session).
+2. Confirm key files exist in `results/figures` and `results/tables`.
+3. Open GUI and verify prediction/explain/robustness/benchmark tabs.
+4. Finalize report, slides, and video from templates.
+5. Push all code and docs to GitHub with a clean `git status`.
+
+---
+
+# WaiYarAung — BERTweet Text Classification
 
 Fine-tuning **BERTweet** (`vinai/bertweet-base`) on three datasets for text classification,
 with evaluation metrics, confusion matrices, and LIME explainability.
 
----
-
-## Project Structure
+## Contribution Structure
 
 ```
-project/
-│
-├── bertweet_imdb.ipynb        ← Notebook: IMDB binary sentiment
-├── bertweet_sst2.ipynb        ← Notebook: SST-2 binary sentiment
-├── bertweet_emotion.ipynb     ← Notebook: Emotion 6-class classification
-│
-├── saved_outputs/
-│   ├── imdb/
-│   │   ├── model/                  ← Fine-tuned model weights + tokenizer
-│   │   ├── class_names.json        ← ["neg", "pos"]
-│   │   ├── classification_report.json
-│   │   ├── confusion_matrix.png
-│   │   └── lime_explanations.json
-│   ├── sst2/
-│   │   └── ...                     ← Same structure as above
-│   └── emotion/
-│       └── ...                     ← Same structure as above
-│
-├── requirements.txt
-└── README.md
-```
+notebooks/
+├── WaiYarAung_bertweet_imdb.ipynb        ← Notebook: IMDB binary sentiment
+├── WaiYarAung_bertweet_sst2.ipynb        ← Notebook: SST-2 binary sentiment
+└── WaiYarAung_bertweet_emotion.ipynb     ← Notebook: Emotion 6-class classification
 
----
+checkpoints/
+├── bertweet_imdb/      ← Fine-tuned model weights + tokenizer
+├── bertweet_sst2/
+└── bertweet_emotion/
+
+results/
+├── figures/            ← Confusion matrices (WaiYarAung_*_confusion_matrix.png)
+└── tables/             ← Classification reports, class names, LIME explanations
+```
 
 ## Datasets
 
@@ -38,11 +177,9 @@ All datasets are loaded automatically from the **Hugging Face Hub** — no manua
 
 | Notebook | Dataset | HF Identifier | Task | Classes |
 |---|---|---|---|---|
-| `bertweet_imdb.ipynb` | IMDB | `imdb` | Binary sentiment | neg, pos |
-| `bertweet_sst2.ipynb` | SST-2 | `glue` / `sst2` | Binary sentiment | negative, positive |
-| `bertweet_emotion.ipynb` | Emotion | `dair-ai/emotion` | Multiclass emotion | sadness, joy, love, anger, fear, surprise |
-
----
+| `WaiYarAung_bertweet_imdb.ipynb` | IMDB | `imdb` | Binary sentiment | neg, pos |
+| `WaiYarAung_bertweet_sst2.ipynb` | SST-2 | `glue` / `sst2` | Binary sentiment | negative, positive |
+| `WaiYarAung_bertweet_emotion.ipynb` | Emotion | `dair-ai/emotion` | Multiclass emotion | sadness, joy, love, anger, fear, surprise |
 
 ## Model
 
@@ -57,26 +194,25 @@ All datasets are loaded automatically from the **Hugging Face Hub** — no manua
 > movie-review datasets — a domain mismatch exists and is discussed in each notebook.
 > The Emotion dataset is the best natural fit for BERTweet.
 
----
+## Training Configuration
 
-## Option A — View Results Without Running Anything
+| Parameter | Value |
+|---|---|
+| Model | `vinai/bertweet-base` |
+| Max sequence length | 128 |
+| Epochs | 3 |
+| Learning rate | 2e-5 |
+| Batch size | 16 |
+| Optimizer | AdamW |
+| LR schedule | Linear with warm-up |
+| Validation split | Stratified 80/20 hold-out |
 
-The `saved_outputs/` folder contains all pre-computed results:
-
-- **`classification_report.json`** — precision, recall, F1, accuracy per class
-- **`confusion_matrix.png`** — visual confusion matrix
-- **`lime_explanations.json`** — 5 pre-computed LIME word-importance explanations
-
-Open these files directly, or launch the Streamlit app (see Option C below).
-
----
-
-## Option B — Re-run the Notebooks
+## Running the Notebooks
 
 ### 1. Install dependencies
 
 ```bash
-pip install -r requirements.txt
+pip install -r WaiYarAung_requirements.txt
 ```
 
 ### 2. Launch Jupyter
@@ -87,7 +223,7 @@ jupyter notebook
 
 ### 3. Open and run
 
-Open any of the three `.ipynb` files and run **Kernel → Restart & Run All**.
+Open any of the three `WaiYarAung_bertweet_*.ipynb` files and run **Kernel → Restart & Run All**.
 
 > **Note**: Training takes approximately:
 > - ~30–60 min per notebook on CPU
@@ -104,34 +240,13 @@ Open any of the three `.ipynb` files and run **Kernel → Restart & Run All**.
 | `tokenizer` arg removed from `Trainer` in transformers 5.x | Replaced with `processing_class` |
 | `trainer.evaluate()` fails without prior `train()` | Replaced with `trainer.predict()` |
 
----
+## Pre-computed Results
 
-## Training Configuration
+The `results/` folder contains all pre-computed outputs (no re-training needed):
 
-| Parameter | Value |
-|---|---|
-| Model | `vinai/bertweet-base` |
-| Max sequence length | 128 |
-| Epochs | 3 |
-| Learning rate | 2e-5 |
-| Batch size | 16 |
-| Optimizer | AdamW |
-| LR schedule | Linear with warm-up |
-| Validation split | Stratified 80/20 hold-out |
-
----
-
-## Requirements
-
-See `requirements.txt` for the full list. Key libraries:
-
-- `transformers >= 5.0`
-- `datasets`
-- `torch`
-- `scikit-learn`
-- `lime`
-
----
+- **`WaiYarAung_*_classification_report.json`** — precision, recall, F1, accuracy per class
+- **`WaiYarAung_*_confusion_matrix.png`** — visual confusion matrix
+- **`WaiYarAung_*_lime_explanations.json`** — 5 pre-computed LIME word-importance explanations
 
 ## Explainability — LIME
 
@@ -140,12 +255,3 @@ that explains individual predictions by highlighting which words most influenced
 
 - **Green bars** — words that support the predicted class
 - **Red bars** — words that oppose the predicted class
-
-Pre-computed explanations for 5 validation samples per dataset are saved in
-`saved_outputs/<dataset>/lime_explanations.json` and visualised in the Streamlit app.
-
----
-
-## Authors
-
-Group project — NLP / Machine Learning course
