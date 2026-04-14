@@ -124,7 +124,7 @@ The dashboard will open at `http://localhost:8501`.
 
 Logistic Regression + SHAP
 ```bash
-streamlit run demo/gui_3.py
+python3 -m streamlit run demo/gui_3.py
 ```
 ## Deliverables Checklist
 
