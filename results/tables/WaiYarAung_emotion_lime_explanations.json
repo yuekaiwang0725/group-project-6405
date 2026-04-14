@@ -1,0 +1,242 @@
+[
+  {
+    "text": "im sure ive got it right and my state of unencumberedness despite many years of feeling like i couldnt keep up anybody else is causing me to see my life as charmed",
+    "true_label": "joy",
+    "pred_label": "joy",
+    "correct": true,
+    "explanation": [
+      [
+        "charmed",
+        0.558752652143404
+      ],
+      [
+        "sure",
+        0.1422408679520664
+      ],
+      [
+        "feeling",
+        -0.07982685682286646
+      ],
+      [
+        "couldnt",
+        -0.06515461649645374
+      ],
+      [
+        "im",
+        -0.059028519450215575
+      ],
+      [
+        "me",
+        -0.05687106937810147
+      ],
+      [
+        "up",
+        0.05645999597929112
+      ],
+      [
+        "and",
+        0.05446822770289198
+      ],
+      [
+        "keep",
+        -0.05243337872920486
+      ],
+      [
+        "causing",
+        -0.04807736416666737
+      ]
+    ]
+  },
+  {
+    "text": "i feel these people are utterly useless in my view",
+    "true_label": "sadness",
+    "pred_label": "sadness",
+    "correct": true,
+    "explanation": [
+      [
+        "useless",
+        0.9398697253030488
+      ],
+      [
+        "view",
+        0.0055177242050680085
+      ],
+      [
+        "are",
+        0.00442016024891393
+      ],
+      [
+        "these",
+        0.0042153387588703154
+      ],
+      [
+        "people",
+        -0.002774238519867635
+      ],
+      [
+        "feel",
+        0.002762318282002698
+      ],
+      [
+        "my",
+        0.0016533081793293194
+      ],
+      [
+        "in",
+        0.0016433757804946941
+      ],
+      [
+        "utterly",
+        0.001617662041646248
+      ],
+      [
+        "i",
+        -0.000814441331033348
+      ]
+    ]
+  },
+  {
+    "text": "i feel a despairing sadness because after so much time working on this we have to cut ties",
+    "true_label": "sadness",
+    "pred_label": "sadness",
+    "correct": true,
+    "explanation": [
+      [
+        "despairing",
+        0.32867392486628677
+      ],
+      [
+        "sadness",
+        0.24052852334986916
+      ],
+      [
+        "feel",
+        0.21953689834628226
+      ],
+      [
+        "a",
+        0.06061248527417126
+      ],
+      [
+        "working",
+        -0.060024941258619305
+      ],
+      [
+        "cut",
+        -0.04767934560338046
+      ],
+      [
+        "after",
+        0.046162215205709164
+      ],
+      [
+        "to",
+        0.041768194597225604
+      ],
+      [
+        "so",
+        0.030950557185037964
+      ],
+      [
+        "because",
+        -0.019246177306792633
+      ]
+    ]
+  },
+  {
+    "text": "i feel sure the majority would go for ios on a galaxy sii or a lumia",
+    "true_label": "joy",
+    "pred_label": "joy",
+    "correct": true,
+    "explanation": [
+      [
+        "sure",
+        0.3790322018116881
+      ],
+      [
+        "feel",
+        0.2492957299628817
+      ],
+      [
+        "i",
+        0.0749550638716798
+      ],
+      [
+        "or",
+        -0.07049467352089465
+      ],
+      [
+        "for",
+        0.05573725245175279
+      ],
+      [
+        "the",
+        -0.054957367891935
+      ],
+      [
+        "majority",
+        0.04246712203544843
+      ],
+      [
+        "on",
+        -0.03616907431913962
+      ],
+      [
+        "ios",
+        -0.01279170270605633
+      ],
+      [
+        "go",
+        -0.006676000439786389
+      ]
+    ]
+  },
+  {
+    "text": "i just feel pathetic holding on when theres obviously nothing for me to hold on to",
+    "true_label": "sadness",
+    "pred_label": "sadness",
+    "correct": true,
+    "explanation": [
+      [
+        "pathetic",
+        0.7843743601690135
+      ],
+      [
+        "hold",
+        0.047109591757642635
+      ],
+      [
+        "nothing",
+        0.039057756052124956
+      ],
+      [
+        "theres",
+        0.019171536825196744
+      ],
+      [
+        "i",
+        -0.019083482478508235
+      ],
+      [
+        "holding",
+        0.01885063287545948
+      ],
+      [
+        "me",
+        -0.018739424478269526
+      ],
+      [
+        "on",
+        -0.018124658187852482
+      ],
+      [
+        "feel",
+        0.01294655368878562
+      ],
+      [
+        "when",
+        -0.012562646466589687
+      ]
+    ]
+  }
+]
