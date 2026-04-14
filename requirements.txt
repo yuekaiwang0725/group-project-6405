@@ -15,3 +15,5 @@ joblib
 tqdm
 wordcloud
 youtube-comment-downloader
+shap
+torchvision
