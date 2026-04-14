@@ -94,7 +94,11 @@ python3 -m experiments.run_distilbert --dataset sst2 --epochs 3 --batch-size 16 
 python3 -m experiments.run_cross_domain
 python3 -m experiments.run_robustness
 ```
-
+Logistic Regression + SHAP
+```bash
+python3 -m experiments.run_Logistic_Regression --dataset imdb --max-features 10000
+python3 -m experiments.run_Logistic_Regression --dataset sst2 --max-features 10000
+```
 Generated outputs:
 
 - Processed datasets: `data/processed/*.csv`
@@ -102,6 +106,13 @@ Generated outputs:
 - Model checkpoints: `checkpoints/baseline/*` and `checkpoints/distilbert/*`
 - Metrics tables: `results/tables/*.csv` and `results/tables/*.json`
 - Figures: `results/figures/*.png`
+
+Logistic Regression + SHAP
+- Processed datasets (Same)
+- Statistics and labels (Same)
+- Model checkpoints: `checkpoints/logistic_regression/*`
+- Metrics tables (Same)
+- Figures (Same)
 
 ### 4) Launch GUI demo
 
@@ -111,6 +122,10 @@ streamlit run demo/gui_demo.py
 
 The dashboard will open at `http://localhost:8501`.
 
+Logistic Regression + SHAP
+```bash
+streamlit run demo/gui_3.py
+```
 ## Deliverables Checklist
 
 - [ ] Reproducible code (`src/` + `experiments/`)
