@@ -127,6 +127,8 @@ Logistic Regression + SHAP
 python3 -m streamlit run demo/gui_3.py
 ```
 
+
+
 ## Deliverables Checklist
 
 - [ ] Reproducible code (`src/` + `experiments/`)
@@ -147,6 +149,57 @@ python3 -m streamlit run demo/gui_3.py
 5. Push all code and docs to GitHub with a clean `git status`.
 
 ---
+
+
+
+# YU JUNCHEG — GRU with Attention Model
+
+This module implements a Bi-directional GRU with Bahdanau Attention for text classification (emotion, IMDB, SST-2). 
+More detail you can find in `gru_attention/README.md`
+To run:
+
+**Navigate to the gru_attention directory:**
+```bash
+cd gru_attention
+```
+
+**Install dependencies** (if not already installed):
+```bash
+pip install -r ../requirements.txt
+```
+
+## No train the models:
+** Prepare data ** 
+The data is from the .\GROUP-PROJECT-6045\data\processed
+If you not find or miss any '.csv' data file, you can try this way to rebuild them:
+```bash
+cd ..
+python -m src.main prepare-data
+cd gru_attention
+python cleanup.py
+```
+
+**Train the models:** 
+```bash
+python train.py
+```
+
+**Evaluate the models and generate reports:**
+```bash
+python test.py
+```
+
+## Have already train the models/ Just want ti use my trained models:
+**Launch the interactive demo:**
+```bash
+streamlit run gru_demo.py
+```
+
+**Clean up generated files && data** (optional):
+```bash
+python cleanup.py
+```
+
 
 # WaiYarAung — BERTweet Text Classification
 
@@ -255,3 +308,5 @@ that explains individual predictions by highlighting which words most influenced
 
 - **Green bars** — words that support the predicted class
 - **Red bars** — words that oppose the predicted class
+
+
