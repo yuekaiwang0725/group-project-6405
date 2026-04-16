@@ -12,3 +12,9 @@ results/logs/
 *.log
 .waylog/
 pip-*/
+
+results/tables/*.csv
+results/tables/*.json
+results/figures/*.png
+checkpoints/baseline/*
+checkpoints/distilbert/*  

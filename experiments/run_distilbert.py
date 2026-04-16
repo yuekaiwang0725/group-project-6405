@@ -122,7 +122,6 @@ def run_distilbert(
         save_total_limit=2,
         report_to=[],
         use_cpu=selected_device == "cpu",
-        use_mps_device=selected_device == "mps",
         seed=42,
     )
 
