@@ -49,18 +49,33 @@ task_choice = st.sidebar.selectbox(
     }[x]
 )
 
+
+st.sidebar.markdown("---")
 st.sidebar.markdown("---")
 with st.sidebar.expander("📚 Edit References", expanded=False):
+    # Pre-populated references in IEEE format
+    default_refs = (
+        "[1] A. Vaswani et al., \"Attention is all you need,\" in Proc. 31st Int. Conf. Neural Inf. Process. Syst. (NIPS), Long Beach, CA, USA, 2017, pp. 5998–6008.\n\n"
+        "[2] D. Bahdanau, K. Cho, and Y. Bengio, \"Neural machine translation by jointly learning to align and translate,\" in 3rd Int. Conf. Learn. Represent. (ICLR), San Diego, CA, USA, 2015."
+    )
+    
     ref_text = st.text_area(
         "Modify references here:", 
-        "1. Vaswani, et al. 'Attention is All You Need'.\n2. Bahdanau, et al. 'Neural Machine Translation by Jointly Learning to Align and Translate'.",
-        height=150
+        value=default_refs,
+        height=200
     )
 
 model, vocab, config = load_all_assets(task_choice)
 
 label_configs = {
-    'emotion': {0: 'Sadness', 1: 'Joy', 2: 'Love', 3: 'Anger', 4: 'Fear', 5: 'Surprise'},
+    'emotion': {
+    0: 'Sadness 😢', 
+    1: 'Joy 😊', 
+    2: 'Love ❤️', 
+    3: 'Anger 😡', 
+    4: 'Fear 😨', 
+    5: 'Surprise 😲'
+    },
     'imdb': {0: 'Negative', 1: 'Positive'},
     'sst2': {0: 'Negative', 1: 'Positive'}
 }
