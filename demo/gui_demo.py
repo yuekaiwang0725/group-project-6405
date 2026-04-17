@@ -220,9 +220,14 @@ def main() -> None:
     st.title("Trustworthy English Sentiment Analysis")
     st.write("GUI demo for sentiment and emotion classification using SVM and DistilBERT.")
 
-    tab_predict, tab_emotion, tab_explain, tab_robustness, tab_benchmark, tab_dashboard = st.tabs(
-        ["Sentiment", "Emotion (6-class)", "Explain", "Robustness", "Benchmark", "📊 Sentiment Radar"]
+    tab_predict, tab_emotion, tab_benchmark, tab_dashboard = st.tabs(
+        ["Sentiment", "Emotion (6-class)", "Benchmark", "📊 Sentiment Radar"]
     )
+
+    # # --- Explain and Robustness tabs hidden for demo ---
+    # tab_predict, tab_emotion, tab_explain, tab_robustness, tab_benchmark, tab_dashboard = st.tabs(
+    #     ["Sentiment", "Emotion (6-class)", "Explain", "Robustness", "Benchmark", "📊 Sentiment Radar"]
+    # )
 
     with tab_predict:
         st.subheader("Sentiment Prediction (Positive / Negative)")
@@ -258,53 +263,55 @@ def main() -> None:
             with col_distilbert:
                 _render_emotion_result("DistilBERT", _predict_emotion_distilbert(emotion_text))
 
-    with tab_explain:
-        st.subheader("Explainability")
-        text = st.text_area(
-            "Text for explanation",
-            "The story is engaging but some scenes are too long.",
-            key="explain_text",
-        )
-        vectorizer, model = _load_baseline()
-        if vectorizer is None or model is None:
-            st.warning("Baseline checkpoint missing. Run baseline experiment first.")
-        else:
-            contributions = top_token_contributions(text, vectorizer, model, top_k=12)
-            if not contributions:
-                st.info("No token contribution available for this text.")
-            else:
-                explain_df = pd.DataFrame(
-                    contributions, columns=["token/ngram", "contribution"]
-                )
-                st.dataframe(explain_df, use_container_width=True)
+    # --- Explain tab (hidden for demo) ---
+    # with tab_explain:
+    #     st.subheader("Explainability")
+    #     text = st.text_area(
+    #         "Text for explanation",
+    #         "The story is engaging but some scenes are too long.",
+    #         key="explain_text",
+    #     )
+    #     vectorizer, model = _load_baseline()
+    #     if vectorizer is None or model is None:
+    #         st.warning("Baseline checkpoint missing. Run baseline experiment first.")
+    #     else:
+    #         contributions = top_token_contributions(text, vectorizer, model, top_k=12)
+    #         if not contributions:
+    #             st.info("No token contribution available for this text.")
+    #         else:
+    #             explain_df = pd.DataFrame(
+    #                 contributions, columns=["token/ngram", "contribution"]
+    #             )
+    #             st.dataframe(explain_df, use_container_width=True)
 
-    with tab_robustness:
-        st.subheader("Stress Test")
-        source_text = st.text_area(
-            "Original text",
-            "I expected this film to be boring, but it was excellent.",
-            key="robust_text",
-        )
-        model_name = st.selectbox("Model for stress test", list(MODEL_LABELS), key="robust_model")
-        perturbation_name = st.selectbox(
-            "Perturbation", list(available_perturbations().keys()), key="perturb_type"
-        )
-        if st.button("Run stress test"):
-            perturb_fn = available_perturbations()[perturbation_name]
-            perturbed_text = perturb_fn(source_text)
-            original_pred = _predict_with_model(model_name, source_text)
-            perturbed_pred = _predict_with_model(model_name, perturbed_text)
-            if original_pred is None or perturbed_pred is None:
-                st.error("Model checkpoint missing.")
-            else:
-                st.write(f"Original: `{source_text}`")
-                st.write(f"Perturbed ({perturbation_name}): `{perturbed_text}`")
-                st.info(
-                    f"Original => {_label_text(original_pred[0])} ({original_pred[1]:.4f})"
-                )
-                st.info(
-                    f"Perturbed => {_label_text(perturbed_pred[0])} ({perturbed_pred[1]:.4f})"
-                )
+    # --- Robustness tab (hidden for demo) ---
+    # with tab_robustness:
+    #     st.subheader("Stress Test")
+    #     source_text = st.text_area(
+    #         "Original text",
+    #         "I expected this film to be boring, but it was excellent.",
+    #         key="robust_text",
+    #     )
+    #     model_name = st.selectbox("Model for stress test", list(MODEL_LABELS), key="robust_model")
+    #     perturbation_name = st.selectbox(
+    #         "Perturbation", list(available_perturbations().keys()), key="perturb_type"
+    #     )
+    #     if st.button("Run stress test"):
+    #         perturb_fn = available_perturbations()[perturbation_name]
+    #         perturbed_text = perturb_fn(source_text)
+    #         original_pred = _predict_with_model(model_name, source_text)
+    #         perturbed_pred = _predict_with_model(model_name, perturbed_text)
+    #         if original_pred is None or perturbed_pred is None:
+    #             st.error("Model checkpoint missing.")
+    #         else:
+    #             st.write(f"Original: `{source_text}`")
+    #             st.write(f"Perturbed ({perturbation_name}): `{perturbed_text}`")
+    #             st.info(
+    #                 f"Original => {_label_text(original_pred[0])} ({original_pred[1]:.4f})"
+    #             )
+    #             st.info(
+    #                 f"Perturbed => {_label_text(perturbed_pred[0])} ({perturbed_pred[1]:.4f})"
+    #             )
 
     with tab_benchmark:
         st.subheader("Sentiment Analysis — Model Comparison")
