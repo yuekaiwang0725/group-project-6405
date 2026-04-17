@@ -176,7 +176,6 @@ If you not find or miss any '.csv' data file, you can try this way to rebuild th
 cd ..
 python -m src.main prepare-data
 cd gru_attention
-python cleanup.py
 ```
 
 **Train the models:** 
