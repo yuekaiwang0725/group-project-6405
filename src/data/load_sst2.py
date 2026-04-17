@@ -11,8 +11,11 @@ from src.data.preprocess import normalize_dataframe
 def load_sst2_splits() -> dict[str, pd.DataFrame]:
     dataset: dict[str, Any] = load_dataset("glue", "sst2")
     train_df = pd.DataFrame(dataset["train"])[["sentence", "label"]]
-    val_df = pd.DataFrame(dataset["validation"])[["sentence", "label"]]
-    test_df = pd.DataFrame(dataset["validation"])[["sentence", "label"]]
+    # SST-2 official test set has no public labels, so we split
+    # the validation set 50/50 into val and test to avoid data leakage.
+    full_val = pd.DataFrame(dataset["validation"])[["sentence", "label"]]
+    val_df = full_val.sample(frac=0.5, random_state=42)
+    test_df = full_val.drop(val_df.index)
 
     rename_map = {"sentence": "text"}
     train_df = train_df.rename(columns=rename_map)

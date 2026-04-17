@@ -12,8 +12,10 @@ echo "===== 3/4 Preparing data & running experiments ====="
 python3 -m src.main prepare-data
 python3 -m experiments.run_baseline --dataset imdb
 python3 -m experiments.run_baseline --dataset sst2
+python3 -m experiments.run_baseline --dataset emotion
 python3 -m experiments.run_distilbert --dataset imdb --epochs 3 --batch-size 16 --max-length 128
 python3 -m experiments.run_distilbert --dataset sst2 --epochs 3 --batch-size 16 --max-length 128
+python3 -m experiments.run_distilbert --dataset emotion --epochs 3 --batch-size 16 --max-length 128
 python3 -m experiments.run_cross_domain
 python3 -m experiments.run_robustness
 

@@ -73,11 +73,12 @@ def _extract_texts(comments: list[dict[str, Any]]) -> list[str]:
 
 
 def _sentiment_donut(sent_df: pd.DataFrame) -> go.Figure:
-    counts = sent_df["distilbert_label"].value_counts()
-    if "svm_label" in sent_df.columns and sent_df["svm_label"].notna().any():
+    if "distilbert_label" in sent_df.columns and sent_df["distilbert_label"].notna().any():
         model_col = "distilbert_label"
+    elif "svm_label" in sent_df.columns and sent_df["svm_label"].notna().any():
+        model_col = "svm_label"
     else:
-        model_col = "distilbert_label"
+        return go.Figure()
     counts = sent_df[model_col].value_counts()
 
     fig = go.Figure(
@@ -152,7 +153,9 @@ def _emotion_radar(emotion_df: pd.DataFrame) -> go.Figure:
 
 
 def _model_comparison_bar(sent_df: pd.DataFrame) -> go.Figure:
-    if sent_df["svm_label"].isna().all() or sent_df["distilbert_label"].isna().all():
+    has_svm = "svm_label" in sent_df.columns and sent_df["svm_label"].notna().any()
+    has_db = "distilbert_label" in sent_df.columns and sent_df["distilbert_label"].notna().any()
+    if not has_svm and not has_db:
         return go.Figure()
 
     svm_pos = (sent_df["svm_label"] == "positive").sum()
@@ -324,9 +327,6 @@ def render_dashboard_tab() -> None:
     with row2_left:
         # Word cloud
         st.markdown("**💬 Sentiment Word Cloud**")
-        pos_texts = [r["text"] for r in sent_results if r.get(label_col.replace("_label", "_label")) == "positive"]
-        neg_texts = [r["text"] for r in sent_results if r.get(label_col.replace("_label", "_label")) == "negative"]
-        # Simpler approach: use the label_col key
         pos_texts = sent_df.loc[sent_df[label_col] == "positive", "text"].tolist()
         neg_texts = sent_df.loc[sent_df[label_col] == "negative", "text"].tolist()
         wc_img = generate_sentiment_wordcloud(pos_texts, neg_texts)

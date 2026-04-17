@@ -83,7 +83,7 @@ def run_distilbert(
     val_dataset = val_dataset.map(tokenize, batched=True)
     test_dataset = test_dataset.map(tokenize, batched=True)
 
-    data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
+    data_collator = DataCollatorWithPadding(tokenizer)
 
     def compute_metrics(eval_pred):
         logits, labels = eval_pred
@@ -104,9 +104,6 @@ def run_distilbert(
 
     args = TrainingArguments(
         output_dir=str(out_dir),
-        overwrite_output_dir=True,
-        do_train=True,
-        do_eval=True,
         learning_rate=2e-5,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
@@ -116,11 +113,12 @@ def run_distilbert(
         save_strategy="epoch",
         logging_strategy="steps",
         logging_steps=50,
+        logging_dir=str(logging_dir),
         load_best_model_at_end=True,
         metric_for_best_model="f1",
         greater_is_better=True,
         save_total_limit=2,
-        report_to=[],
+        report_to="none",
         use_cpu=selected_device == "cpu",
         seed=42,
     )
@@ -130,7 +128,7 @@ def run_distilbert(
         args=args,
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
         data_collator=data_collator,
         compute_metrics=compute_metrics,
     )

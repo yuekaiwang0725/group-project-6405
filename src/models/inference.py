@@ -22,7 +22,6 @@ def predict_with_distilbert(texts: list[str], checkpoint_dir: str | Path) -> lis
     clf = pipeline(
         "text-classification",
         model=str(checkpoint_dir),
-        tokenizer=str(checkpoint_dir),
         truncation=True,
         max_length=128,
     )

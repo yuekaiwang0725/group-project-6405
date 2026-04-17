@@ -19,7 +19,6 @@ from src.robustness.perturbation import available_perturbations
 MODEL_LABELS = {
     "baseline_svm": "Baseline SVM",
     "distilbert": "DistilBERT",
-    "bert_base_uncased": "BERT-base-uncased",
 }
 EMOTION_LABELS = {
     0: "sadness",
@@ -115,13 +114,6 @@ def _load_emotion_distilbert():
     return load_finetuned_distilbert(model_dir)
 
 
-@st.cache_resource
-def _load_bert():
-    model_dir = _resolve_checkpoint_dir("bert_base_uncased", "imdb")
-    if model_dir is None:
-        return None
-    return load_finetuned_distilbert(model_dir)
-
 
 def _predict_baseline(text: str) -> tuple[int, float] | None:
     vectorizer, model = _load_baseline()
@@ -161,19 +153,10 @@ def _predict_emotion_distilbert(text: str) -> tuple[int, float] | None:
     return predict_sentiment(artifacts, text)
 
 
-def _predict_bert(text: str) -> tuple[int, float] | None:
-    artifacts = _load_bert()
-    if artifacts is None:
-        return None
-    return predict_sentiment(artifacts, text)
-
-
 def _predict_with_model(model_name: str, text: str) -> tuple[int, float] | None:
     if model_name == "baseline_svm":
         return _predict_baseline(text)
-    if model_name == "distilbert":
-        return _predict_distilbert(text)
-    return _predict_bert(text)
+    return _predict_distilbert(text)
 
 
 def _predict_all_models(text: str) -> dict[str, tuple[int, float] | None]:
@@ -235,7 +218,7 @@ def main() -> None:
     st.set_page_config(page_title="EE6405 Sentiment GUI", layout="wide")
     inject_custom_css()
     st.title("Trustworthy English Sentiment Analysis")
-    st.write("GUI demo for sentiment and emotion classification using SVM, DistilBERT, and BERT.")
+    st.write("GUI demo for sentiment and emotion classification using SVM and DistilBERT.")
 
     tab_predict, tab_emotion, tab_explain, tab_robustness, tab_benchmark, tab_dashboard = st.tabs(
         ["Sentiment", "Emotion (6-class)", "Explain", "Robustness", "Benchmark", "📊 Sentiment Radar"]
@@ -334,10 +317,6 @@ def main() -> None:
             "DistilBERT IMDb Metrics",
         )
         _show_metric_table(
-            PROJECT_ROOT / "results" / "tables" / "bert_base_uncased_imdb_test_metrics.csv",
-            "BERT IMDb Metrics",
-        )
-        _show_metric_table(
             PROJECT_ROOT / "results" / "tables" / "metrics_cross_domain.csv",
             "Cross-domain Metrics",
         )
@@ -366,10 +345,6 @@ def main() -> None:
             _show_image(
                 PROJECT_ROOT / "results" / "figures" / "distilbert_imdb_training_curves.png",
                 "DistilBERT training curves (IMDb)",
-            )
-            _show_image(
-                PROJECT_ROOT / "results" / "figures" / "bert_base_uncased_imdb_training_curves.png",
-                "BERT training curves (IMDb)",
             )
         with col2:
             _show_image(

@@ -17,4 +17,5 @@ results/tables/*.csv
 results/tables/*.json
 results/figures/*.png
 checkpoints/baseline/*
-checkpoints/distilbert/*  
+checkpoints/distilbert/*
+checkpoints/logistic_regression/*
