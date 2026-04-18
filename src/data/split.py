@@ -1,3 +1,5 @@
+"""Compute basic statistics (row count, label ratio, text length) for a data split."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

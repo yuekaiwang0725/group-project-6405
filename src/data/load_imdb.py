@@ -1,3 +1,5 @@
+"""Load and split the IMDb movie review dataset from HuggingFace."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -9,6 +11,7 @@ from src.data.preprocess import normalize_dataframe
 
 
 def load_imdb_splits() -> dict[str, pd.DataFrame]:
+    """Return train/val/test DataFrames with 'text' and 'label' columns."""
     dataset: dict[str, Any] = load_dataset("imdb")
     train_df = pd.DataFrame(dataset["train"])[["text", "label"]]
     test_df = pd.DataFrame(dataset["test"])[["text", "label"]]

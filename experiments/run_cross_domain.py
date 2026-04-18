@@ -1,3 +1,5 @@
+"""Experiment: cross-domain evaluation — train on one domain, test on another."""
+
 from __future__ import annotations
 
 from pathlib import Path

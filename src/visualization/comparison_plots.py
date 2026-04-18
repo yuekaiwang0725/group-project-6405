@@ -1,3 +1,5 @@
+"""Grouped bar chart comparing in-domain F1 across models and datasets."""
+
 from __future__ import annotations
 
 from pathlib import Path

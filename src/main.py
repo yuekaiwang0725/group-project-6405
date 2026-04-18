@@ -1,3 +1,5 @@
+"""Project entry point: data preparation (download, preprocess, save splits)."""
+
 import argparse
 from dataclasses import asdict
 from pathlib import Path

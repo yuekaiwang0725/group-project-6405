@@ -1,3 +1,5 @@
+"""Main Streamlit GUI: Sentiment, Emotion, Benchmark, and Sentiment Radar tabs."""
+
 import sys
 from pathlib import Path
 

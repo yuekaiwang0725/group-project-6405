@@ -1,3 +1,5 @@
+"""Inference helpers: load checkpoints and predict with SVM or DistilBERT."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -12,6 +14,7 @@ from src.models.baseline_svm import BaselineSVM
 def predict_with_baseline(
     texts: list[str], vectorizer_path: str | Path, model_path: str | Path
 ) -> list[int]:
+    """Predict labels using a saved TF-IDF + SVM checkpoint."""
     vectorizer = joblib.load(vectorizer_path)
     model: BaselineSVM = joblib.load(model_path)
     features = vectorizer.transform(texts)

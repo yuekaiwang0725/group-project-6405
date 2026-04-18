@@ -1,3 +1,5 @@
+"""Baseline SVM classifier using sklearn LinearSVC."""
+
 from __future__ import annotations
 
 import numpy as np
@@ -5,6 +7,7 @@ from sklearn.svm import LinearSVC
 
 
 class BaselineSVM:
+    """Thin wrapper around LinearSVC with sigmoid-based confidence scores."""
     def __init__(self, c: float = 1.0) -> None:
         self.model = LinearSVC(C=c, random_state=42)
 

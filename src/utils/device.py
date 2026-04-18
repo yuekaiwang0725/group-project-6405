@@ -1,3 +1,5 @@
+"""Device detection and configuration (CPU / CUDA / Apple MPS)."""
+
 from __future__ import annotations
 
 import os

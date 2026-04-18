@@ -1,3 +1,5 @@
+"""Load and split the SST-2 short-sentence sentiment dataset."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -9,6 +11,7 @@ from src.data.preprocess import normalize_dataframe
 
 
 def load_sst2_splits() -> dict[str, pd.DataFrame]:
+    """Return train/val/test DataFrames; val set is split 50/50 since test has no public labels."""
     dataset: dict[str, Any] = load_dataset("glue", "sst2")
     train_df = pd.DataFrame(dataset["train"])[["sentence", "label"]]
     # SST-2 official test set has no public labels, so we split

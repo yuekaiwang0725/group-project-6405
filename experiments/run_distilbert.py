@@ -1,3 +1,5 @@
+"""Experiment: fine-tune a DistilBERT (or other transformer) on a sentiment/emotion dataset."""
+
 from __future__ import annotations
 
 import argparse

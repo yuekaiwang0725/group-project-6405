@@ -1,3 +1,5 @@
+"""Experiment: train and evaluate TF-IDF + SVM baseline on a given dataset."""
+
 from __future__ import annotations
 
 import argparse

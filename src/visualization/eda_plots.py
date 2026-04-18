@@ -1,3 +1,5 @@
+"""EDA plots: label distribution bar chart and text-length histogram."""
+
 from __future__ import annotations
 
 from pathlib import Path

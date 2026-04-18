@@ -1,3 +1,5 @@
+"""Reproducibility: set random seeds for Python, NumPy, and PyTorch."""
+
 from __future__ import annotations
 
 import os
@@ -8,6 +10,7 @@ import torch
 
 
 def set_seed(seed: int) -> None:
+    """Fix all random seeds for reproducible experiments."""
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)

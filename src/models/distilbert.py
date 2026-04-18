@@ -1,3 +1,5 @@
+"""Load and run inference with a DistilBERT sequence-classification model."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -11,6 +13,7 @@ from src.utils.device import configure_device_runtime, resolve_device
 
 @dataclass
 class DistilBertArtifacts:
+    """Container for a tokenizer + model pair."""
     tokenizer: AutoTokenizer
     model: AutoModelForSequenceClassification
 

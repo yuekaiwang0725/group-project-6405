@@ -1,3 +1,5 @@
+"""Save a cross-domain F1 heatmap (train_domain × test_domain)."""
+
 from __future__ import annotations
 
 from pathlib import Path

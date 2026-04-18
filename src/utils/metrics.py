@@ -1,3 +1,5 @@
+"""Classification metrics: accuracy, precision, recall, F1 (binary or macro)."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -6,6 +8,7 @@ from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 
 
 def infer_average_mode(labels: list[int]) -> str:
+    """Return 'binary' for 2-class, 'macro' for multi-class."""
     return "binary" if len(set(labels)) <= 2 else "macro"
 
 

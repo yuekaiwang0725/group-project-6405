@@ -1,3 +1,5 @@
+"""Save a confusion matrix heatmap as a PNG image."""
+
 from __future__ import annotations
 
 from pathlib import Path

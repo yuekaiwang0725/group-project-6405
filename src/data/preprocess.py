@@ -1,3 +1,5 @@
+"""Text preprocessing utilities: HTML removal, whitespace normalization."""
+
 from __future__ import annotations
 
 import re

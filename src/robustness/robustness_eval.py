@@ -1,3 +1,5 @@
+"""Evaluate model robustness by comparing F1 before and after perturbation."""
+
 from __future__ import annotations
 
 from collections.abc import Callable
@@ -11,6 +13,7 @@ def evaluate_robustness(
     predict_fn: Callable[[list[str]], list[int]],
     perturb_fn: Callable[[str], str],
 ) -> dict[str, float]:
+    """Return baseline and perturbed F1/accuracy, plus the F1 drop."""
     baseline_preds = predict_fn(texts)
     baseline_metrics = evaluate_predictions(labels, baseline_preds)
 

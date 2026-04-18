@@ -1,3 +1,5 @@
+"""Load the 6-class Emotion dataset (sadness, joy, love, anger, fear, surprise)."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -9,6 +11,7 @@ from src.data.preprocess import normalize_dataframe
 
 
 def load_emotion_splits() -> dict[str, pd.DataFrame]:
+    """Return train/val/test DataFrames from the dair-ai/emotion dataset."""
     dataset: dict[str, Any] = load_dataset("dair-ai/emotion")
     train_df = pd.DataFrame(dataset["train"])[["text", "label"]]
     val_df = pd.DataFrame(dataset["validation"])[["text", "label"]]

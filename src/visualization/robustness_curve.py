@@ -1,3 +1,5 @@
+"""Bar chart showing F1 drop per perturbation type for each model."""
+
 from __future__ import annotations
 
 from pathlib import Path

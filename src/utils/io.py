@@ -1,3 +1,5 @@
+"""File I/O helpers: directory creation, JSON read/write, CSV export."""
+
 from __future__ import annotations
 
 import json

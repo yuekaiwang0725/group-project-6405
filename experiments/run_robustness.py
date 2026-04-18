@@ -1,3 +1,5 @@
+"""Experiment: robustness evaluation — measure F1 drop under text perturbations."""
+
 from __future__ import annotations
 
 from pathlib import Path

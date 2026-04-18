@@ -1,3 +1,5 @@
+"""Text perturbation functions for robustness testing (case, negation, typo)."""
+
 from __future__ import annotations
 
 import random
@@ -5,6 +7,7 @@ from typing import Callable
 
 
 def perturb_case(text: str) -> str:
+    """Convert entire text to uppercase."""
     return text.upper()
 
 

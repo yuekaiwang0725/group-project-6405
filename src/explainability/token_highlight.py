@@ -1,3 +1,5 @@
+"""Explainability: compute per-token contribution scores from SVM coefficients."""
+
 from __future__ import annotations
 
 from collections import Counter
@@ -14,6 +16,7 @@ def top_token_contributions(
     model: BaselineSVM,
     top_k: int = 10,
 ) -> list[tuple[str, float]]:
+    """Return the top-k tokens ranked by |tfidf_weight × svm_coefficient|."""
     feature_names = np.array(vectorizer.get_feature_names_out())
     row = vectorizer.transform([text])
     if row.nnz == 0:

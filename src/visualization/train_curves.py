@@ -1,3 +1,5 @@
+"""Plot training loss and eval F1 curves from HuggingFace Trainer logs."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -11,6 +13,7 @@ from src.utils.io import ensure_dir
 def save_training_curves(
     history_df: pd.DataFrame, output_path: str | Path, title: str = "Training Curves"
 ) -> None:
+    """Save a 2-panel figure: loss curve (left) and F1 curve (right)."""
     fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
     if "loss" in history_df.columns:
