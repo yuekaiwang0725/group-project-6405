@@ -1,1 +1,11 @@
-["sadness", "joy", "love", "anger", "fear", "surprise"]
+{
+  "labels": [
+    "sadness",
+    "joy",
+    "love",
+    "anger",
+    "fear",
+    "surprise"
+  ],
+  "num_labels": 6
+}
