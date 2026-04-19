@@ -1,0 +1,7 @@
+{
+  "label": "lora_bertweet_r8_emotion_train",
+  "device": "cuda:0",
+  "seconds": 163.418,
+  "peak_vram_mb": 1581.72,
+  "reserved_vram_mb": 1640.0
+}

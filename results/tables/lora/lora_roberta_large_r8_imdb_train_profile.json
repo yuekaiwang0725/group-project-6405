@@ -1,0 +1,7 @@
+{
+  "label": "lora_roberta_large_r8_imdb_train",
+  "device": "cuda:0",
+  "seconds": 298.121,
+  "peak_vram_mb": 5217.78,
+  "reserved_vram_mb": 5426.0
+}

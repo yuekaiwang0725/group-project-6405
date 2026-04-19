@@ -1,0 +1,7 @@
+{
+  "label": "lora_distilbert_r8_sst2_infer",
+  "device": "cuda:0",
+  "seconds": 0.787,
+  "peak_vram_mb": 366.15,
+  "reserved_vram_mb": 812.0
+}

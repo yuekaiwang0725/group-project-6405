@@ -1,0 +1,53 @@
+{
+  "run_name": "lora_bertweet_r8",
+  "model_name": "vinai/bertweet-base",
+  "dataset": "sst2",
+  "method": "lora",
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "lora_dropout": 0.1,
+  "target_modules": [
+    "query",
+    "value"
+  ],
+  "batch_size": 32,
+  "epochs": 5,
+  "early_stopping_patience": 1,
+  "warmup_ratio": 0.06,
+  "max_grad_norm": 1.0,
+  "max_length": 128,
+  "bf16": true,
+  "fp16": false,
+  "gradient_checkpointing": false,
+  "learning_rate": 0.0003,
+  "param_stats": {
+    "total": 135788548,
+    "trainable": 887042,
+    "ratio": 0.0065325243775344
+  },
+  "train_profile": {
+    "label": "lora_bertweet_r8_sst2_train",
+    "device": "cuda:0",
+    "seconds": 683.731,
+    "peak_vram_mb": 1404.47,
+    "reserved_vram_mb": 1526.0
+  },
+  "infer_profile": {
+    "label": "lora_bertweet_r8_sst2_infer",
+    "device": "cuda:0",
+    "seconds": 0.688,
+    "peak_vram_mb": 628.64,
+    "reserved_vram_mb": 1526.0
+  },
+  "test_metrics": {
+    "test_loss": 0.22688838839530945,
+    "test_accuracy": 0.9403669724770642,
+    "test_precision": 0.9377777777777778,
+    "test_recall": 0.9461883408071748,
+    "test_f1": 0.9419642857142857,
+    "test_runtime": 0.6801,
+    "test_samples_per_second": 641.073,
+    "test_steps_per_second": 20.585,
+    "epoch": 5.0
+  }
+}

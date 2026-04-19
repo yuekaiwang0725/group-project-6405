@@ -1,0 +1,7 @@
+{
+  "label": "lora_distilbert_r8_sst2_train",
+  "device": "cuda:0",
+  "seconds": 190.667,
+  "peak_vram_mb": 733.95,
+  "reserved_vram_mb": 812.0
+}

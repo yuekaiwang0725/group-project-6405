@@ -1,0 +1,53 @@
+{
+  "run_name": "lora_bertweet_r8",
+  "model_name": "vinai/bertweet-base",
+  "dataset": "emotion",
+  "method": "lora",
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "lora_dropout": 0.1,
+  "target_modules": [
+    "query",
+    "value"
+  ],
+  "batch_size": 32,
+  "epochs": 5,
+  "early_stopping_patience": 1,
+  "warmup_ratio": 0.06,
+  "max_grad_norm": 1.0,
+  "max_length": 128,
+  "bf16": true,
+  "fp16": false,
+  "gradient_checkpointing": false,
+  "learning_rate": 0.0003,
+  "param_stats": {
+    "total": 135794700,
+    "trainable": 890118,
+    "ratio": 0.006554880271468622
+  },
+  "train_profile": {
+    "label": "lora_bertweet_r8_emotion_train",
+    "device": "cuda:0",
+    "seconds": 163.418,
+    "peak_vram_mb": 1581.72,
+    "reserved_vram_mb": 1640.0
+  },
+  "infer_profile": {
+    "label": "lora_bertweet_r8_emotion_infer",
+    "device": "cuda:0",
+    "seconds": 1.375,
+    "peak_vram_mb": 636.71,
+    "reserved_vram_mb": 1640.0
+  },
+  "test_metrics": {
+    "test_loss": 0.18145327270030975,
+    "test_accuracy": 0.916,
+    "test_precision": 0.8661380185302628,
+    "test_recall": 0.8741717761173069,
+    "test_f1": 0.8699544224640476,
+    "test_runtime": 1.3516,
+    "test_samples_per_second": 1479.761,
+    "test_steps_per_second": 46.612,
+    "epoch": 5.0
+  }
+}

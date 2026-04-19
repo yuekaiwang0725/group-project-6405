@@ -1,0 +1,7 @@
+{
+  "label": "lora_roberta_large_r16_emotion_train",
+  "device": "cuda:0",
+  "seconds": 212.044,
+  "peak_vram_mb": 4320.89,
+  "reserved_vram_mb": 4708.0
+}

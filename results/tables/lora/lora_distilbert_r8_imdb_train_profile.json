@@ -1,0 +1,7 @@
+{
+  "label": "lora_distilbert_r8_imdb_train",
+  "device": "cuda:0",
+  "seconds": 150.702,
+  "peak_vram_mb": 1039.58,
+  "reserved_vram_mb": 1102.0
+}

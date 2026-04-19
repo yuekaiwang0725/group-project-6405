@@ -1,0 +1,7 @@
+{
+  "label": "lora_roberta_large_r16_imdb_infer",
+  "device": "cuda:0",
+  "seconds": 12.506,
+  "peak_vram_mb": 1576.26,
+  "reserved_vram_mb": 5438.0
+}

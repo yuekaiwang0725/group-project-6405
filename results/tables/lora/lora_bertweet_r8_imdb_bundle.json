@@ -1,0 +1,53 @@
+{
+  "run_name": "lora_bertweet_r8",
+  "model_name": "vinai/bertweet-base",
+  "dataset": "imdb",
+  "method": "lora",
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "lora_dropout": 0.1,
+  "target_modules": [
+    "query",
+    "value"
+  ],
+  "batch_size": 32,
+  "epochs": 5,
+  "early_stopping_patience": 2,
+  "warmup_ratio": 0.06,
+  "max_grad_norm": 1.0,
+  "max_length": 128,
+  "bf16": true,
+  "fp16": false,
+  "gradient_checkpointing": false,
+  "learning_rate": 0.0003,
+  "param_stats": {
+    "total": 135788548,
+    "trainable": 887042,
+    "ratio": 0.0065325243775344
+  },
+  "train_profile": {
+    "label": "lora_bertweet_r8_imdb_train",
+    "device": "cuda:0",
+    "seconds": 150.282,
+    "peak_vram_mb": 2022.96,
+    "reserved_vram_mb": 2132.0
+  },
+  "infer_profile": {
+    "label": "lora_bertweet_r8_imdb_infer",
+    "device": "cuda:0",
+    "seconds": 7.873,
+    "peak_vram_mb": 683.45,
+    "reserved_vram_mb": 2132.0
+  },
+  "test_metrics": {
+    "test_loss": 0.26548174023628235,
+    "test_accuracy": 0.88676,
+    "test_precision": 0.8631412904679636,
+    "test_recall": 0.91928,
+    "test_f1": 0.8903265796304188,
+    "test_runtime": 7.8663,
+    "test_samples_per_second": 3178.097,
+    "test_steps_per_second": 99.411,
+    "epoch": 3.0
+  }
+}

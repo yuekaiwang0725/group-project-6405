@@ -1,0 +1,7 @@
+{
+  "label": "lora_bertweet_r8_imdb_train",
+  "device": "cuda:0",
+  "seconds": 150.282,
+  "peak_vram_mb": 2022.96,
+  "reserved_vram_mb": 2132.0
+}

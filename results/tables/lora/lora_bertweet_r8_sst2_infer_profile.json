@@ -1,0 +1,7 @@
+{
+  "label": "lora_bertweet_r8_sst2_infer",
+  "device": "cuda:0",
+  "seconds": 0.688,
+  "peak_vram_mb": 628.64,
+  "reserved_vram_mb": 1526.0
+}

@@ -1,0 +1,7 @@
+{
+  "label": "lora_roberta_large_r8_sst2_infer",
+  "device": "cuda:0",
+  "seconds": 0.662,
+  "peak_vram_mb": 1496.35,
+  "reserved_vram_mb": 4072.0
+}

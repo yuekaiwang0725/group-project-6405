@@ -1,0 +1,7 @@
+{
+  "label": "lora_distilbert_r8_emotion_infer",
+  "device": "cuda:0",
+  "seconds": 1.045,
+  "peak_vram_mb": 374.23,
+  "reserved_vram_mb": 912.0
+}

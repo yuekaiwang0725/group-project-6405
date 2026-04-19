@@ -1,0 +1,7 @@
+{
+  "label": "lora_roberta_large_r8_sst2_train",
+  "device": "cuda:0",
+  "seconds": 795.133,
+  "peak_vram_mb": 3662.04,
+  "reserved_vram_mb": 4072.0
+}

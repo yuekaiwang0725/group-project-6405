@@ -1,0 +1,53 @@
+{
+  "run_name": "lora_roberta_large_r16",
+  "model_name": "FacebookAI/roberta-large",
+  "dataset": "imdb",
+  "method": "lora",
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.1,
+  "target_modules": [
+    "query",
+    "value"
+  ],
+  "batch_size": 32,
+  "epochs": 5,
+  "early_stopping_patience": 1,
+  "warmup_ratio": 0.06,
+  "max_grad_norm": 1.0,
+  "max_length": 128,
+  "bf16": true,
+  "fp16": false,
+  "gradient_checkpointing": false,
+  "learning_rate": 0.0002,
+  "param_stats": {
+    "total": 357986308,
+    "trainable": 2624514,
+    "ratio": 0.007331325085204097
+  },
+  "train_profile": {
+    "label": "lora_roberta_large_r16_imdb_train",
+    "device": "cuda:0",
+    "seconds": 164.986,
+    "peak_vram_mb": 5231.28,
+    "reserved_vram_mb": 5438.0
+  },
+  "infer_profile": {
+    "label": "lora_roberta_large_r16_imdb_infer",
+    "device": "cuda:0",
+    "seconds": 12.506,
+    "peak_vram_mb": 1576.26,
+    "reserved_vram_mb": 5438.0
+  },
+  "test_metrics": {
+    "test_loss": 0.19385595619678497,
+    "test_accuracy": 0.92912,
+    "test_precision": 0.9253766851704996,
+    "test_recall": 0.93352,
+    "test_f1": 0.9294305057745917,
+    "test_runtime": 12.5003,
+    "test_samples_per_second": 1999.948,
+    "test_steps_per_second": 62.558,
+    "epoch": 3.0
+  }
+}
