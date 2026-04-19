@@ -1,0 +1,190 @@
+[
+  {
+    "text": "if you 're burnt out on it 's a wonderful life marathons and bored with a christmas carol , it might just be the movie you 're looking for .",
+    "true_label": "positive",
+    "pred_label": "positive",
+    "correct": true,
+    "explanation": [
+      [
+        "bored",
+        -0.35662037657725904
+      ],
+      [
+        "you",
+        0.2990507910424834
+      ],
+      [
+        "wonderful",
+        0.27449594403559185
+      ],
+      [
+        "burnt",
+        -0.27438652193183694
+      ],
+      [
+        "if",
+        0.20651841990497088
+      ],
+      [
+        "movie",
+        0.16395357249159992
+      ],
+      [
+        "re",
+        0.12761522653443264
+      ],
+      [
+        "s",
+        0.12561309648522384
+      ],
+      [
+        "for",
+        0.12146968505701025
+      ],
+      [
+        "might",
+        -0.11924313142580681
+      ]
+    ]
+  },
+  {
+    "text": "equally impressive degree",
+    "true_label": "positive",
+    "pred_label": "positive",
+    "correct": true,
+    "explanation": [
+      [
+        "impressive",
+        0.00981862048590587
+      ],
+      [
+        "equally",
+        0.002810462633670242
+      ],
+      [
+        "degree",
+        -0.0008871810767770718
+      ]
+    ]
+  },
+  {
+    "text": "deeply biased , and wholly designed to make you feel guilty about ignoring what the filmmakers clearly believe",
+    "true_label": "negative",
+    "pred_label": "negative",
+    "correct": true,
+    "explanation": [
+      [
+        "biased",
+        0.24173611104942058
+      ],
+      [
+        "guilty",
+        0.12388101788001687
+      ],
+      [
+        "ignoring",
+        0.10525610370303311
+      ],
+      [
+        "make",
+        0.1030515897691137
+      ],
+      [
+        "deeply",
+        -0.07778042818168991
+      ],
+      [
+        "feel",
+        0.0748164342592555
+      ],
+      [
+        "believe",
+        -0.060002107680650084
+      ],
+      [
+        "about",
+        -0.035754103263556956
+      ],
+      [
+        "to",
+        -0.02406891289178314
+      ],
+      [
+        "what",
+        -0.01911717736778998
+      ]
+    ]
+  },
+  {
+    "text": "here 's a case of two actors who do everything humanly possible to create characters who are sweet and believable , and are defeated by a screenplay that forces them into bizarre , implausible behavior .",
+    "true_label": "negative",
+    "pred_label": "negative",
+    "correct": true,
+    "explanation": [
+      [
+        "implausible",
+        0.3567995907337457
+      ],
+      [
+        "sweet",
+        -0.24742658049574323
+      ],
+      [
+        "defeated",
+        0.22961123638214612
+      ],
+      [
+        "of",
+        0.17271173393604708
+      ],
+      [
+        "into",
+        0.14916693496275144
+      ],
+      [
+        "are",
+        0.13593221648687095
+      ],
+      [
+        "screenplay",
+        0.11689463542428921
+      ],
+      [
+        "bizarre",
+        0.10580533689495622
+      ],
+      [
+        "and",
+        -0.10301539671660093
+      ],
+      [
+        "do",
+        -0.06848224438611408
+      ]
+    ]
+  },
+  {
+    "text": "scores a direct hit",
+    "true_label": "positive",
+    "pred_label": "positive",
+    "correct": true,
+    "explanation": [
+      [
+        "direct",
+        0.00438468255570635
+      ],
+      [
+        "hit",
+        0.004015053093294321
+      ],
+      [
+        "scores",
+        0.0033955562564913847
+      ],
+      [
+        "a",
+        0.0007927092016399941
+      ]
+    ]
+  }
+]

@@ -1,0 +1,242 @@
+[
+  {
+    "text": "This reminded me SOO much of Michael Winner's crappy 'Dirty Weekend' with it's awful English low budget feel.<br /><br />Firstly I must say I am a fan of both exploitation and serious film. I appreciate, say, 'Demented' for it's ineptitude and 'Last House on the Left' for it's sheer unashamed brutality. And any number of inventive and increasingly brutal Italian spin offs.<br /><br />This was just pointless though. Kind of like a British budget director thought 'let's remake \"I Spit on your Grave\" without making it too harrowing now that horror is back in fashion with Hostel.<br /><br />The whole thing just doesn't hang together or have a point. What's with the rapists's daughter? Why bother having the man be an expert in security cameras? Crappy.",
+    "true_label": "neg",
+    "pred_label": "neg",
+    "correct": true,
+    "explanation": [
+      [
+        "point",
+        0.003829518108930522
+      ],
+      [
+        "exploitation",
+        -0.002970666068539361
+      ],
+      [
+        "like",
+        0.0028670420294434206
+      ],
+      [
+        "serious",
+        -0.0025815840453890415
+      ],
+      [
+        "making",
+        0.0025521796254908934
+      ],
+      [
+        "am",
+        -0.002198655331971551
+      ],
+      [
+        "for",
+        0.0019866814012180762
+      ],
+      [
+        "a",
+        -0.0008840238277736446
+      ],
+      [
+        "both",
+        0.0006259697972382902
+      ],
+      [
+        "fashion",
+        -0.00017769034718722476
+      ]
+    ]
+  },
+  {
+    "text": "A fondly-remembered melodrama \u0096 thanks chiefly to Ronald Colman's fine Oscar-winning central performance \u0096 about an oft-treated theme: the nature of acting and how it can overtake one's perception of reality. In this case, we have a well-known thespian tackling Shakespeare's \"Othello\", so that the film's last third delves effectively into the thriller genre \u0096 with press agent Edmond O'Brien (who happens to really be besotted with Colman's co-star and ex-wife Signe Hasso) 'investigating' the actor's possible involvement in the Desdemona-like strangling of a celebrity-seeking waitress (a very slim Shelley Winters). The theatrical/New York atmosphere of the immediate post-war era is vividly captured by the husband-and-wife screen writing team of Garson Kanin and Ruth Gordon and legendary \"actor's director\" George Cukor (all of whom were recognized by the Academy with nominations); incidentally, the film nabbed a second Oscar for Miklos Rozsa's eclectic score. Colman, forever the suave leading man blessed besides with a velvety voice, does well enough by Shakespeare \u0096 gaining conviction the farther his character slips into obsessive jealousy, a murderous rage and, eventually, paranoia; however, he is not let down by a supporting cast which also includes director Ray Collins, reporter Millard Mitchell, detective Joe Sawyer and coroner Whit Bissell. Though the mid-section is a bit strained, the film makes up for any deficiencies with a remarkably-handled Expressionist denouement.",
+    "true_label": "pos",
+    "pred_label": "pos",
+    "correct": true,
+    "explanation": [
+      [
+        "denouement",
+        0.016668773936767488
+      ],
+      [
+        "film",
+        0.015866785833699944
+      ],
+      [
+        "involvement",
+        0.012659471700149288
+      ],
+      [
+        "agent",
+        0.009683472741414895
+      ],
+      [
+        "Edmond",
+        0.008587535130680049
+      ],
+      [
+        "besides",
+        -0.007377826248565698
+      ],
+      [
+        "era",
+        0.006905061751613446
+      ],
+      [
+        "Hasso",
+        0.004557147132256308
+      ],
+      [
+        "all",
+        0.0021616704193753995
+      ],
+      [
+        "can",
+        0.0021136000242201426
+      ]
+    ]
+  },
+  {
+    "text": "I had never heard of this film prior to seeing it, I wondered if it was an independent film, and I was correct, but with a good cast I decided to chance it. Basically drifter Michael Williams (Nicolas Cage) is in the town Red Rock, Wyoming, looking for a job, and meeting bar owner Wayne Brown (Pleasantville's J.T. Walsh) he is given a large sum of money, mistaken for a hit-man he has hired to kill his unfaithful wife Suzanne (Lara Flynn Boyle). He does not correct him, takes the money, and goes to warn Suzanne, and after she makes him a counteroffer, he decides he needs to leave. When Wayne knows his real identity, he chases Michael shooting a big gun, until he gets in a car with Lyle from Dallas (Dennis Hopper). But things get complicated when Michael realises Lyle is the hit-man he was mistaken for, and he makes a quick retreat. He goes back to Suzanne, and knowing they are both in danger, they plan to leave town together, and add another complication by falling for each other. Before they leave however, Suzanne insists they go and steal a big amount money in the safe. Of course things aren't going to go smoothly, and Wayne and Lyle catch up to them, and Lyle forces them and now tied-up Wayne to go and get the buried money. In the end, Lyle and Wayne both get what they deserve, Michael and Suzanne do get on a moving train together, but it is obvious she cares more about the money, and she gets what she deserves too. Also starring Craig Reay as Jim, Vance Johnson as Mr. Johnson, Timothy Carhart as Deputy Matt Greytack, Dwight Yoakam as Truck Driver and Robert Apel as Howard. The performances, apart from maybe a lame Boyle, are all fine and dandy, and it has got quite a good film noir feel for a black comedy thriller. Very good!",
+    "true_label": "pos",
+    "pred_label": "neg",
+    "correct": false,
+    "explanation": [
+      [
+        "if",
+        0.18525442853136015
+      ],
+      [
+        "Boyle",
+        0.1720116851241763
+      ],
+      [
+        "as",
+        0.1394723514105674
+      ],
+      [
+        "knowing",
+        0.12899197578149793
+      ],
+      [
+        "add",
+        0.07152272178084634
+      ],
+      [
+        "Pleasantville",
+        0.049973283021428956
+      ],
+      [
+        "Nicolas",
+        0.04798924918964981
+      ],
+      [
+        "quite",
+        0.022312179117017487
+      ],
+      [
+        "Walsh",
+        -0.01763274609987707
+      ],
+      [
+        "maybe",
+        -0.007786364524453935
+      ]
+    ]
+  },
+  {
+    "text": "A beautiful shopgirl in London is swept off her feet by a millionaire tea plantation owner and soon finds herself married and living with him at his villa in British Ceylon. Although based upon the book by Robert Standish, this initial set-up is highly reminiscent of Hitchock's \"Rebecca\", with leading lady Elizabeth Taylor clashing with the imposing chief of staff at the mansion and (almost immediately) her own husband, who is still under the thumb of his deceased-but-dominant father. Taylor, a last-minute substitute for an ailing Vivien Leigh, looks creamy-smooth in her high fashion wardrobe, and her performance is quite strong; however, once husband Peter Finch starts drinking heavily and barking orders at her, one might think her dedication to him rather masochistic (this feeling hampers the ending as well). Still, the film offers a heady lot for soap buffs: romantic drama, a bit of travelogue, interpretive dance, an elephant stampede, and a perfectly-timed outbreak of cholera! *** from ****",
+    "true_label": "pos",
+    "pred_label": "pos",
+    "correct": true,
+    "explanation": [
+      [
+        "barking",
+        -0.25887223634267026
+      ],
+      [
+        "clashing",
+        -0.2140557073381244
+      ],
+      [
+        "her",
+        0.15479135061495242
+      ],
+      [
+        "at",
+        0.13492229851147466
+      ],
+      [
+        "his",
+        -0.13130098903030818
+      ],
+      [
+        "offers",
+        0.12874399684470447
+      ],
+      [
+        "orders",
+        0.09129877932385108
+      ],
+      [
+        "interpretive",
+        0.08588727892718846
+      ],
+      [
+        "by",
+        0.04205166617985249
+      ],
+      [
+        "Taylor",
+        -0.04010156191951495
+      ]
+    ]
+  },
+  {
+    "text": "I thought it was a very funny movie. I love dog movies and comedy movies so combined they were twice as good. K-9, k-911, and k-9 PI are my favorite movies. Jim Belushi is hysterical and Jerry Lee is hilarious and adorable they make a great team. The only downside is that i really didn't understand how Dooley's wife died. She died before this movie but how? If they said it i must have missed it. Other than that I give it two thumbs/tails up! Those dogs (Jerry Lee and Zeus) must have had A lot of training. They were so funny and all the noises Jerry Lee would make when Dooley was talking to him was so funny. my favorite was when Jerry Lee sang and when he would bite peoples privates to get information very very funny lol",
+    "true_label": "pos",
+    "pred_label": "pos",
+    "correct": true,
+    "explanation": [
+      [
+        "thumbs",
+        0.04261875079916449
+      ],
+      [
+        "as",
+        0.03965601365605037
+      ],
+      [
+        "twice",
+        0.03904873354996699
+      ],
+      [
+        "Belushi",
+        0.03697222711077271
+      ],
+      [
+        "favorite",
+        0.034576925621302115
+      ],
+      [
+        "was",
+        -0.02555864129189331
+      ],
+      [
+        "he",
+        -0.020254741658203984
+      ],
+      [
+        "him",
+        0.015293902517359848
+      ],
+      [
+        "dogs",
+        -0.015183004233444201
+      ],
+      [
+        "tails",
+        -0.005145773009571294
+      ]
+    ]
+  }
+]

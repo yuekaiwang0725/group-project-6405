@@ -1,0 +1,53 @@
+{
+  "run_name": "lora_roberta_large_r16",
+  "model_name": "FacebookAI/roberta-large",
+  "dataset": "emotion",
+  "method": "lora",
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.1,
+  "target_modules": [
+    "query",
+    "value"
+  ],
+  "batch_size": 32,
+  "epochs": 5,
+  "early_stopping_patience": 2,
+  "warmup_ratio": 0.06,
+  "max_grad_norm": 0.3,
+  "max_length": 128,
+  "bf16": false,
+  "fp16": true,
+  "gradient_checkpointing": false,
+  "learning_rate": 5e-05,
+  "param_stats": {
+    "total": 357994508,
+    "trainable": 2628614,
+    "ratio": 0.0073426098480818035
+  },
+  "train_profile": {
+    "label": "lora_roberta_large_r16_emotion_train",
+    "device": "cuda:0",
+    "seconds": 212.044,
+    "peak_vram_mb": 4320.89,
+    "reserved_vram_mb": 4708.0
+  },
+  "infer_profile": {
+    "label": "lora_roberta_large_r16_emotion_infer",
+    "device": "cuda:0",
+    "seconds": 1.552,
+    "peak_vram_mb": 1514.35,
+    "reserved_vram_mb": 4708.0
+  },
+  "test_metrics": {
+    "test_loss": 0.2557980716228485,
+    "test_accuracy": 0.896,
+    "test_precision": 0.8493433551206552,
+    "test_recall": 0.8430646424957264,
+    "test_f1": 0.8460500580918916,
+    "test_runtime": 1.5464,
+    "test_samples_per_second": 1293.329,
+    "test_steps_per_second": 40.74,
+    "epoch": 5.0
+  }
+}

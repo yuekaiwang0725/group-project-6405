@@ -1,0 +1,35 @@
+{
+  "source": "Transcribed from notebooks/joannasj-bilstm-attention.ipynb notebook output cells",
+  "model": "BiLSTM + Attention (best weights)",
+  "imdb": {
+    "accuracy": 0.81,
+    "classes": {
+      "negative": {"precision": 0.80, "recall": 0.83, "f1-score": 0.82, "support": 12500},
+      "positive": {"precision": 0.83, "recall": 0.80, "f1-score": 0.81, "support": 12500}
+    },
+    "macro avg": {"precision": 0.81, "recall": 0.81, "f1-score": 0.81, "support": 25000},
+    "weighted avg": {"precision": 0.81, "recall": 0.81, "f1-score": 0.81, "support": 25000}
+  },
+  "sst2": {
+    "accuracy": 0.84,
+    "classes": {
+      "negative": {"precision": 0.84, "recall": 0.84, "f1-score": 0.84, "support": 428},
+      "positive": {"precision": 0.85, "recall": 0.84, "f1-score": 0.85, "support": 444}
+    },
+    "macro avg": {"precision": 0.84, "recall": 0.84, "f1-score": 0.84, "support": 872},
+    "weighted avg": {"precision": 0.84, "recall": 0.84, "f1-score": 0.84, "support": 872}
+  },
+  "emotion": {
+    "accuracy": 0.92,
+    "classes": {
+      "sadness":  {"precision": 0.96, "recall": 0.94, "f1-score": 0.95, "support": 581},
+      "joy":      {"precision": 0.94, "recall": 0.94, "f1-score": 0.94, "support": 695},
+      "love":     {"precision": 0.83, "recall": 0.84, "f1-score": 0.83, "support": 159},
+      "anger":    {"precision": 0.91, "recall": 0.93, "f1-score": 0.92, "support": 275},
+      "fear":     {"precision": 0.90, "recall": 0.88, "f1-score": 0.89, "support": 224},
+      "surprise": {"precision": 0.72, "recall": 0.86, "f1-score": 0.79, "support": 66}
+    },
+    "macro avg": {"precision": 0.88, "recall": 0.90, "f1-score": 0.89, "support": 2000},
+    "weighted avg": {"precision": 0.92, "recall": 0.92, "f1-score": 0.92, "support": 2000}
+  }
+}

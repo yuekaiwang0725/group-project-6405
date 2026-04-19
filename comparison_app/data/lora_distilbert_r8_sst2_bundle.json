@@ -1,0 +1,53 @@
+{
+  "run_name": "lora_distilbert_r8",
+  "model_name": "distilbert-base-uncased",
+  "dataset": "sst2",
+  "method": "lora",
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "lora_dropout": 0.1,
+  "target_modules": [
+    "q_lin",
+    "v_lin"
+  ],
+  "batch_size": 32,
+  "epochs": 5,
+  "early_stopping_patience": 1,
+  "warmup_ratio": 0.06,
+  "max_grad_norm": 1.0,
+  "max_length": 128,
+  "bf16": true,
+  "fp16": false,
+  "gradient_checkpointing": false,
+  "learning_rate": 0.0003,
+  "param_stats": {
+    "total": 67694596,
+    "trainable": 739586,
+    "ratio": 0.010925332946813067
+  },
+  "train_profile": {
+    "label": "lora_distilbert_r8_sst2_train",
+    "device": "cuda:0",
+    "seconds": 190.667,
+    "peak_vram_mb": 733.95,
+    "reserved_vram_mb": 812.0
+  },
+  "infer_profile": {
+    "label": "lora_distilbert_r8_sst2_infer",
+    "device": "cuda:0",
+    "seconds": 0.787,
+    "peak_vram_mb": 366.15,
+    "reserved_vram_mb": 812.0
+  },
+  "test_metrics": {
+    "test_loss": 0.2803855240345001,
+    "test_accuracy": 0.8830275229357798,
+    "test_precision": 0.8839285714285714,
+    "test_recall": 0.8878923766816144,
+    "test_f1": 0.8859060402684564,
+    "test_runtime": 0.7814,
+    "test_samples_per_second": 557.948,
+    "test_steps_per_second": 17.916,
+    "epoch": 2.0
+  }
+}

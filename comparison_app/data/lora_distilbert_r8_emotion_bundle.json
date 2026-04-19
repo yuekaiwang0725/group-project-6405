@@ -1,0 +1,53 @@
+{
+  "run_name": "lora_distilbert_r8",
+  "model_name": "distilbert-base-uncased",
+  "dataset": "emotion",
+  "method": "lora",
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "lora_dropout": 0.1,
+  "target_modules": [
+    "q_lin",
+    "v_lin"
+  ],
+  "batch_size": 32,
+  "epochs": 5,
+  "early_stopping_patience": 1,
+  "warmup_ratio": 0.06,
+  "max_grad_norm": 1.0,
+  "max_length": 128,
+  "bf16": true,
+  "fp16": false,
+  "gradient_checkpointing": false,
+  "learning_rate": 0.0003,
+  "param_stats": {
+    "total": 67700748,
+    "trainable": 742662,
+    "ratio": 0.010969775400413597
+  },
+  "train_profile": {
+    "label": "lora_distilbert_r8_emotion_train",
+    "device": "cuda:0",
+    "seconds": 128.676,
+    "peak_vram_mb": 839.4,
+    "reserved_vram_mb": 912.0
+  },
+  "infer_profile": {
+    "label": "lora_distilbert_r8_emotion_infer",
+    "device": "cuda:0",
+    "seconds": 1.045,
+    "peak_vram_mb": 374.23,
+    "reserved_vram_mb": 912.0
+  },
+  "test_metrics": {
+    "test_loss": 0.16525568068027496,
+    "test_accuracy": 0.9235,
+    "test_precision": 0.8918052524126648,
+    "test_recall": 0.876474049860291,
+    "test_f1": 0.8804383493230943,
+    "test_runtime": 1.0396,
+    "test_samples_per_second": 1923.803,
+    "test_steps_per_second": 60.6,
+    "epoch": 5.0
+  }
+}

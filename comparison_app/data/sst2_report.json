@@ -1,0 +1,8 @@
+{
+    "task": "sst2",
+    "test_accuracy": 82.11,
+    "total_samples": 872,
+    "model_architecture": "Bi-GRU + Attention",
+    "vocab_size": 8000,
+    "status": "Verified"
+}
