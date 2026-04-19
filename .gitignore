@@ -45,4 +45,4 @@ checkpoints/logistic_regression/*
 !results/figures/model_comparison_in_domain_f1.png
 !results/figures/baseline_svm_cross_domain_heatmap.png
 !results/figures/distilbert_cross_domain_heatmap.png
-!results/figures/robustness_drop_curve.png
+!results/figures/robustness_drop_curve.png.cursor/
