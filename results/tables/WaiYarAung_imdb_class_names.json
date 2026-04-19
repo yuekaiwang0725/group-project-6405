@@ -1,1 +1,7 @@
-["neg", "pos"]
+{
+  "labels": [
+    "Negative",
+    "Positive"
+  ],
+  "num_labels": 2
+}

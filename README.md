@@ -200,112 +200,111 @@ python cleanup.py
 ```
 
 
-# WaiYarAung — BERTweet Text Classification
+# WaiYarAung — BERTweet Sentiment & Emotion Suite
 
-Fine-tuning **BERTweet** (`vinai/bertweet-base`) on three datasets for text classification,
-with evaluation metrics, confusion matrices, and LIME explainability.
+Fine-tuning **BERTweet** (`vinai/bertweet-base`) on three datasets for text classification
+with a full training pipeline, hyperparameter search, stratified cross-validation,
+LIME explainability, and a combined Streamlit demo app.
 
 ## Contribution Structure
 
 ```
+WaiYarAung_train_imdb.py              <- Training pipeline: IMDB binary sentiment
+WaiYarAung_train_sst2.py              <- Training pipeline: SST-2 binary sentiment
+WaiYarAung_train_emotion.py           <- Training pipeline: 6-class emotion
+WaiYarAung_gen_artifacts_imdb.py      <- Regenerate eval artifacts (IMDB)
+WaiYarAung_gen_artifacts_sst2.py      <- Regenerate eval artifacts (SST-2)
+WaiYarAung_gen_artifacts_emotion.py   <- Regenerate eval artifacts (Emotion)
+WaiYarAung_requirements.txt           <- All Python dependencies
+demo/
+└── WaiYarAung_app.py                 <- Combined 3-model Streamlit app (port 8504)
 notebooks/
-├── WaiYarAung_bertweet_imdb.ipynb        ← Notebook: IMDB binary sentiment
-├── WaiYarAung_bertweet_sst2.ipynb        ← Notebook: SST-2 binary sentiment
-└── WaiYarAung_bertweet_emotion.ipynb     ← Notebook: Emotion 6-class classification
-
+├── WaiYarAung_bertweet_imdb.ipynb
+├── WaiYarAung_bertweet_sst2.ipynb
+└── WaiYarAung_bertweet_emotion.ipynb
 checkpoints/
-├── bertweet_imdb/      ← Fine-tuned model weights + tokenizer
+├── bertweet_imdb/     <- Tokenizer + config files (WaiYarAung_*)
 ├── bertweet_sst2/
-└── bertweet_emotion/
-
+└── bertweet_emotion/  <- Model weights excluded (>500 MB each, run train script to reproduce)
 results/
-├── figures/            ← Confusion matrices (WaiYarAung_*_confusion_matrix.png)
-└── tables/             ← Classification reports, class names, LIME explanations
+├── figures/
+│   ├── WaiYarAung_imdb_confusion_matrix.png
+│   ├── WaiYarAung_sst2_confusion_matrix.png
+│   └── WaiYarAung_emotion_confusion_matrix.png
+└── tables/
+    ├── WaiYarAung_*_classification_report.json
+    ├── WaiYarAung_*_class_names.json
+    └── WaiYarAung_*_lime_explanations.json
+docs/
+└── WaiYarAung_presentation.pdf       <- Project presentation (9 slides)
 ```
 
 ## Datasets
 
-All datasets are loaded automatically from the **Hugging Face Hub** — no manual download needed.
-
-| Notebook | Dataset | HF Identifier | Task | Classes |
+| Script / Notebook | Dataset | HF Identifier | Task | Classes |
 |---|---|---|---|---|
-| `WaiYarAung_bertweet_imdb.ipynb` | IMDB | `imdb` | Binary sentiment | neg, pos |
-| `WaiYarAung_bertweet_sst2.ipynb` | SST-2 | `glue` / `sst2` | Binary sentiment | negative, positive |
-| `WaiYarAung_bertweet_emotion.ipynb` | Emotion | `dair-ai/emotion` | Multiclass emotion | sadness, joy, love, anger, fear, surprise |
+| IMDB | Movie reviews | `imdb` | Binary sentiment | Negative, Positive |
+| SST-2 | Stanford Sentiment Treebank | `glue/sst2` | Binary sentiment | Negative, Positive |
+| Emotion | Twitter emotions | `dair-ai/emotion` | 6-class emotion | sadness, joy, love, anger, fear, surprise |
 
-## Model
+## Model & Training Pipeline
 
-**BERTweet** — `vinai/bertweet-base`
+**BERTweet** — `vinai/bertweet-base` (RoBERTa pre-trained on 850M tweets)
 
-- RoBERTa-based architecture pre-trained on 850 million English tweets
-- Tweet normalisation applied: user mentions → `@USER`, URLs → `HTTPURL`
-- Max sequence length: 128 tokens
-- Fine-tuned with AdamW optimizer, linear LR schedule, 3 epochs
+| Parameter | IMDB | SST-2 | Emotion |
+|---|---|---|---|
+| Max seq length | 128 | 64 | 64 |
+| Train samples | 600 (balanced) | 600 (balanced) | 1800 (300/class) |
+| Epochs | 2 | 3 | 3 |
+| Batch size | 16 | 16 | 16 |
+| Best LR | 5e-5 | 5e-5 | 5e-5 |
+| CV folds | 2 | 2 | 2 |
 
-> **Domain note**: BERTweet is designed for tweet-style text. IMDB and SST-2 are formal
-> movie-review datasets — a domain mismatch exists and is discussed in each notebook.
-> The Emotion dataset is the best natural fit for BERTweet.
+Every training script runs:
+1. Balanced data loading (equal samples per class)
+2. LR grid search over {2e-5, 5e-5} with Stratified K-Fold CV
+3. AdamW + linear warmup scheduler (10% warmup, gradient clipping)
+4. Best checkpoint saved via `save_pretrained()`
+5. Confusion matrix, classification report, and LIME explanations exported
 
-## Training Configuration
+## Results
 
-| Parameter | Value |
-|---|---|
-| Model | `vinai/bertweet-base` |
-| Max sequence length | 128 |
-| Epochs | 3 |
-| Learning rate | 2e-5 |
-| Batch size | 16 |
-| Optimizer | AdamW |
-| LR schedule | Linear with warm-up |
-| Validation split | Stratified 80/20 hold-out |
+| Model | Val Accuracy | Macro F1 |
+|---|---|---|
+| IMDB Sentiment | **86.5%** | **0.865** |
+| SST-2 Sentiment | **85.3%** | **0.853** |
+| Emotion Classifier | **86.6%** | **0.842** |
 
-## Running the Notebooks
+## Running the Training Scripts
 
 ### 1. Install dependencies
-
 ```bash
 pip install -r WaiYarAung_requirements.txt
 ```
 
-### 2. Launch Jupyter
+### 2. Train each model
+```bash
+python WaiYarAung_train_imdb.py
+python WaiYarAung_train_sst2.py
+python WaiYarAung_train_emotion.py
+```
+> Training takes ~30-60 min per model on CPU, ~5 min on GPU.
+> If interrupted, run `python WaiYarAung_gen_artifacts_<dataset>.py` to regenerate results.
+
+## Running the Combined Demo App
+
+The combined app loads all three models and offers:
+- **Text Prediction**: classify any text with all 3 models + LIME word explanations
+- **YouTube Comments**: fetch up to 80 comments from any YouTube URL and classify them (no API key needed)
+- **Evaluation Results**: confusion matrices, classification reports, per-class F1 charts
 
 ```bash
-jupyter notebook
+streamlit run demo/WaiYarAung_app.py --server.port 8504
 ```
-
-### 3. Open and run
-
-Open any of the three `WaiYarAung_bertweet_*.ipynb` files and run **Kernel → Restart & Run All**.
-
-> **Note**: Training takes approximately:
-> - ~30–60 min per notebook on CPU
-> - ~5–10 min per notebook on GPU
->
-> An internet connection is required on first run to download the dataset and model from Hugging Face Hub.
-
-### Known API fixes (already applied in notebooks)
-
-| Issue | Fix |
-|---|---|
-| `evaluation_strategy` removed in transformers ≥ 4.41 | Replaced with `eval_strategy` |
-| `warmup_ratio` deprecated in transformers ≥ 5.2 | Replaced with `warmup_steps` |
-| `tokenizer` arg removed from `Trainer` in transformers 5.x | Replaced with `processing_class` |
-| `trainer.evaluate()` fails without prior `train()` | Replaced with `trainer.predict()` |
-
-## Pre-computed Results
-
-The `results/` folder contains all pre-computed outputs (no re-training needed):
-
-- **`WaiYarAung_*_classification_report.json`** — precision, recall, F1, accuracy per class
-- **`WaiYarAung_*_confusion_matrix.png`** — visual confusion matrix
-- **`WaiYarAung_*_lime_explanations.json`** — 5 pre-computed LIME word-importance explanations
 
 ## Explainability — LIME
 
-Each notebook includes a LIME (Local Interpretable Model-agnostic Explanations) section
-that explains individual predictions by highlighting which words most influenced the model's decision.
-
+Each model includes LIME (Local Interpretable Model-agnostic Explanations):
 - **Green bars** — words that support the predicted class
-- **Red bars** — words that oppose the predicted class
-
-
+- **Red bars** — words that oppose it
+- Pre-computed explanations saved in `results/tables/WaiYarAung_*_lime_explanations.json`
