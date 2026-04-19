@@ -20,7 +20,7 @@ Deliver a one-week sentiment analysis project with strong visualization and clea
 5. `python -m experiments.run_distilbert --dataset sst2`
 6. `python -m experiments.run_cross_domain`
 7. `python -m experiments.run_robustness`
-8. `streamlit run demo/gui_demo.py`
+8. `streamlit run demo/gui_yuekai.py`
 
 ## Must-have Outputs
 

@@ -1,4 +1,4 @@
-"""TF-IDF + Logistic Regression : classical baseline."""
+"""TF-IDF + Logistic Regression : classical baseline (Kevin Wong)."""
 from __future__ import annotations
 
 import json
@@ -20,7 +20,7 @@ def _load_report(data_dir: Path, ds: str) -> dict:
 
 
 def render(data_dir: Path, assets_dir: Path) -> None:
-    st.header("TF-IDF + Logistic Regression · Baseline")
+    st.header("TF-IDF + Logistic Regression · Kevin Wong")
     st.markdown(
         """
 **Approach:** a classical baseline : tokens are turned into **TF-IDF** vectors and fed into

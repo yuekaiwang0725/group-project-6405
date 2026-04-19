@@ -1,8 +1,8 @@
 """Sentiment Radar — the Social Media Dashboard tab.
 
 This module implements the '📊 Sentiment Radar' tab that is added to the
-main gui_demo.  It is kept in its own file for readability and to avoid
-making gui_demo.py excessively long.
+main gui_yuekai entrypoint. It is kept in its own file for readability and to avoid
+making the main GUI module excessively long.
 """
 
 from __future__ import annotations

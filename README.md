@@ -117,7 +117,7 @@ Logistic Regression + SHAP
 ### 4) Launch GUI demo
 
 ```bash
-streamlit run demo/gui_demo.py
+streamlit run demo/gui_yuekai.py
 ```
 
 The dashboard will open at `http://localhost:8501`.

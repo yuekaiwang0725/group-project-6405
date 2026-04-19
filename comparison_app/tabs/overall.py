@@ -14,7 +14,8 @@ OWNER_LABELS = {
     "WaiYarAung": "WaiYarAung",
     "YU JUNCHENG": "YU JUNCHENG",
     "joannasj": "joannasj",
-    "baseline": "Baseline",
+    "Kevin Wong": "Kevin Wong",
+    "Wang Yuekai": "Wang Yuekai",
 }
 
 DATASET_ORDER = ["imdb", "sst2", "emotion"]

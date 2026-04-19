@@ -27,4 +27,4 @@ echo "===== 4/4 Launching GUI demos ====="
 echo "Main dashboard (SVM + DistilBERT) will open at http://localhost:8501"
 echo "To launch Logistic Regression + SHAP demo, run: streamlit run demo/gui_3.py"
 echo "To run BERTweet notebooks (WaiYarAung), run: pip install -r WaiYarAung_requirements.txt && jupyter notebook"
-streamlit run demo/gui_demo.py
+streamlit run demo/gui_yuekai.py

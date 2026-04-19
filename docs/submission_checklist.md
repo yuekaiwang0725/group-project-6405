@@ -4,7 +4,7 @@
 - [ ] `requirements.txt` is up to date
 - [ ] `python -m src.main prepare-data` runs
 - [ ] all experiment scripts run without path errors
-- [ ] GUI launches with `streamlit run demo/gui_demo.py`
+- [ ] GUI launches with `streamlit run demo/gui_yuekai.py`
 
 ## Results
 - [ ] baseline metrics CSV/JSON generated
