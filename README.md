@@ -209,19 +209,17 @@ LIME explainability, and a combined Streamlit demo app.
 ## Contribution Structure
 
 ```
-WaiYarAung_train_imdb.py              <- Training pipeline: IMDB binary sentiment
-WaiYarAung_train_sst2.py              <- Training pipeline: SST-2 binary sentiment
-WaiYarAung_train_emotion.py           <- Training pipeline: 6-class emotion
-WaiYarAung_gen_artifacts_imdb.py      <- Regenerate eval artifacts (IMDB)
-WaiYarAung_gen_artifacts_sst2.py      <- Regenerate eval artifacts (SST-2)
-WaiYarAung_gen_artifacts_emotion.py   <- Regenerate eval artifacts (Emotion)
-WaiYarAung_requirements.txt           <- All Python dependencies
+notebooks/
+└── WaiYarAung/
+    ├── WaiYarAung_train_imdb.py          <- Training pipeline: IMDB binary sentiment
+    ├── WaiYarAung_train_sst2.py          <- Training pipeline: SST-2 binary sentiment
+    ├── WaiYarAung_train_emotion.py       <- Training pipeline: 6-class emotion
+    ├── WaiYarAung_gen_artifacts_imdb.py  <- Regenerate eval artifacts (IMDB)
+    ├── WaiYarAung_gen_artifacts_sst2.py  <- Regenerate eval artifacts (SST-2)
+    ├── WaiYarAung_gen_artifacts_emotion.py <- Regenerate eval artifacts (Emotion)
+    └── WaiYarAung_requirements.txt       <- All Python dependencies
 demo/
 └── WaiYarAung_app.py                 <- Combined 3-model Streamlit app (port 8504)
-notebooks/
-├── WaiYarAung_bertweet_imdb.ipynb
-├── WaiYarAung_bertweet_sst2.ipynb
-└── WaiYarAung_bertweet_emotion.ipynb
 checkpoints/
 ├── bertweet_imdb/     <- Tokenizer + config files (WaiYarAung_*)
 ├── bertweet_sst2/
@@ -279,14 +277,14 @@ Every training script runs:
 
 ### 1. Install dependencies
 ```bash
-pip install -r WaiYarAung_requirements.txt
+pip install -r notebooks/WaiYarAung/WaiYarAung_requirements.txt
 ```
 
 ### 2. Train each model
 ```bash
-python WaiYarAung_train_imdb.py
-python WaiYarAung_train_sst2.py
-python WaiYarAung_train_emotion.py
+python notebooks/WaiYarAung/WaiYarAung_train_imdb.py
+python notebooks/WaiYarAung/WaiYarAung_train_sst2.py
+python notebooks/WaiYarAung/WaiYarAung_train_emotion.py
 ```
 > Training takes ~30-60 min per model on CPU, ~5 min on GPU.
 > If interrupted, run `python WaiYarAung_gen_artifacts_<dataset>.py` to regenerate results.
